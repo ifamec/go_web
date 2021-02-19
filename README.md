@@ -15,6 +15,7 @@ use `ListenAndServe(port, ServeMux)`
     - [create serveMux](src/webapp/chapter02/web03/main.go)
 
 ## HTTP
+`net/http`
 
 1. Open a TCP connection
 2. Send an HTTP message
@@ -22,8 +23,8 @@ use `ListenAndServe(port, ServeMux)`
 4. Close or reuse the connection for further requests
 
 http request
-- [Get Message](src/webapp/chapter03/http01/main.go)
-- [Post Message](src/webapp/chapter03/http01/index.html)
+- [Get Message](src/webapp/chapter03_http/main.go)
+- [Post Message](src/webapp/chapter03_http/index.html)
 
 http response
 ```
@@ -35,3 +36,4 @@ http response
 ```
 
 [HTTP Reference](https://developer.mozilla.org/en-US/docs/Web/HTTP)
+
