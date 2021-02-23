@@ -33,7 +33,13 @@ func handlerRequestForm(w http.ResponseWriter, r *http.Request)  {
 	_, _ = fmt.Fprintln(w, "Request PostForm:", r.PostForm)
 }
 
+func handlerRequestFormValue(w http.ResponseWriter, r *http.Request)  {
+	_, _ = fmt.Fprintln(w, "Request FormValue:", r.FormValue("username"), r.FormValue("password"))
+
+	_, _ = fmt.Fprintln(w, "Request PostFormValue:", r.PostFormValue("username"), r.PostFormValue("password"))
+}
+
 func main() {
-	http.HandleFunc("/request", handlerRequestForm)
+	http.HandleFunc("/request", handlerRequestFormValue)
 	_ = http.ListenAndServe(":8000", nil)
 }
