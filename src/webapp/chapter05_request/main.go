@@ -24,7 +24,16 @@ func handlerRequestBody(w http.ResponseWriter, r *http.Request)  {
 	_, _ = fmt.Fprintln(w, "Request Body:", string(body))
 }
 
+func handlerRequestForm(w http.ResponseWriter, r *http.Request)  {
+	// parse form
+	_ = r.ParseForm()
+	_, _ = fmt.Fprintln(w, "Request Body ParseForm:", r.Form)
+
+	// post form
+	_, _ = fmt.Fprintln(w, "Request PostForm:", r.PostForm)
+}
+
 func main() {
-	http.HandleFunc("/request", handlerRequestBody)
+	http.HandleFunc("/request", handlerRequestForm)
 	_ = http.ListenAndServe(":8000", nil)
 }
