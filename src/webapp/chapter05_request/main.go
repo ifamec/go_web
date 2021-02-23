@@ -17,7 +17,6 @@ func handlerHeader(w http.ResponseWriter, r *http.Request) {
 	_, _ = fmt.Fprintln(w, "Request URL Query:", r.URL.RawQuery)
 	_, _ = fmt.Fprintln(w, "Request Header:", r.Header)
 	_, _ = fmt.Fprintln(w, "Request Header Accept-Encoding:", r.Header["Accept-Encoding"], r.Header.Get("Accept-Encoding"))
-
 }
 
 func handlerRequestBody(w http.ResponseWriter, r *http.Request)  {
@@ -69,6 +68,13 @@ func handlerResponseRedirect(w http.ResponseWriter, r *http.Request)  {
 	w.WriteHeader(302)}
 
 func main() {
-	http.HandleFunc("/request", handlerResponseRedirect)
+	http.HandleFunc("/request/header", handlerHeader)
+	http.HandleFunc("/request/body", handlerRequestBody)
+	http.HandleFunc("/request/form", handlerRequestForm)
+	http.HandleFunc("/request/formvalue", handlerRequestFormValue)
+	http.HandleFunc("/response/text", handlerResponseText)
+	http.HandleFunc("/response/html", handlerResponseHtml)
+	http.HandleFunc("/response/json", handlerResponseJson)
+	http.HandleFunc("/response/redirect", handlerResponseRedirect)
 	_ = http.ListenAndServe(":8000", nil)
 }
