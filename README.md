@@ -47,3 +47,9 @@ http response
 `net/http`
 
 [request](src/webapp/chapter05_request/main.go)
+
+## Template
+
+`text/template`
+
+`html/template`
