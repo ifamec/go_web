@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link type="text/css" rel="stylesheet" href="../../static/css/style.css">
+    <script type="text/javascript" src="../../static/script/jquery-1.7.2.js"></script>
+    <script>
+        // window.onload = function(){};
+        $(function () {
+            $("#sub_btn").click(function () {
+                // get user name
+                const username = $("#username").val();
+                if (username === "") {
+                    alert("username is empty");
+                    return false;
+                }
+                // get password
+                const password = $("#password").val();
+                if (password === "") {
+                    alert("password is empty");
+                    return false;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="login_header">
+    <img class="logo_img" alt="" src="../../static/img/logo.gif">
+</div>
+
+<div class="login_banner">
+
+    <div id="l_content">
+        <span class="login_word">Welcome</span>
+    </div>
+
+    <div id="content">
+        <div class="login_form">
+            <div class="login_box">
+                <div class="tit">
+                    <h1>Member</h1>
+                    <a href="signup.html">Sign up</a>
+                </div>
+                <div class="msg_cont">
+                    <b></b>
+                    <span class="errorMsg">Please provide username and password</span>
+                </div>
+                <div class="form">
+                    <form action="login_success.html" method="POST">
+                        <label for="username">Username:</label>
+                        <input class="itxt" type="text" placeholder="username" autocomplete="off" tabindex="1"
+                               name="username" id="username"/>
+                        <br/>
+                        <br/>
+                        <label for="password">Password:</label>
+                        <input class="itxt" type="password" placeholder="password" autocomplete="off" tabindex="1"
+                               name="password" id="password"/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <input type="submit" value="登录" id="sub_btn"/>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bottom">
+    <span>Bookstore.Copyright &copy;2021</span>
+</div>
+</body>
+</html>

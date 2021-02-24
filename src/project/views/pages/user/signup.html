@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup Page</title>
+    <link type="text/css" rel="stylesheet" href="../../static/css/style.css">
+    <style type="text/css">
+        .login_form {
+            height: 420px;
+            margin-top: 25px;
+        }
+    </style>
+    <script src="../../static/script/jquery-1.7.2.js"></script>
+    <script>
+        $(function () {
+            $("#sub_btn").click(function () {
+                const username = $("#username").val();
+                const usernameReg = /^[a-zA-Z0-9_-]{3,16}$/;
+                const flag = usernameReg.test(username);
+                if (!flag) {
+                    alert("Username invalid, 3-16 digit character, number, underline, minus sign.");
+                    return false;
+                }
+
+                const password = $("#password").val();
+                const passwordReg = /^[a-zA-Z0-9_-]{6,18}$/;
+                if (!passwordReg.test(password)) {
+                    alert("Password invalid, 6-18 digit character, number, underline, minus sign.")
+                    return false;
+                }
+
+                // confirm password
+                const confirm = $("#confirm").val();
+                if (confirm === "") {
+                    alert("Password cannot be empty");
+                    return false;
+                }
+                if (confirm !== password) {
+                    $("#confirm").val("");
+                    alert("Password Not Identical");
+                    return false;
+                }
+
+                const email = $("#email").val();
+                if (!/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(email)) {
+                    alert("Invalid Email");
+                    return false;
+                }
+
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="login_header">
+    <img class="logo_img" alt="" src="../../static/img/logo.gif">
+</div>
+
+<div class="login_banner">
+
+    <div id="l_content">
+        <span class="login_word">Welcome Signup</span>
+    </div>
+
+    <div id="content">
+        <div class="login_form">
+            <div class="login_box">
+                <div class="tit">
+                    <h1>Member</h1>
+                    <span class="errorMsg"></span>
+                </div>
+                <br>
+                <div class="form">
+                    <form action="signup_success.html">
+                        <label for="username">Username:</label>
+                        <input class="itxt" type="text" placeholder="username" autocomplete="off" tabindex="1"
+                               name="username" id="username"/>
+                        <br/>
+                        <br/>
+                        <label for="password">Password:</label>
+                        <input class="itxt" type="password" placeholder="password" autocomplete="off" tabindex="1"
+                               name="password" id="password"/>
+                        <br/>
+                        <br/>
+                        <label for="confirm">Confirm:</label>
+                        <input class="itxt" type="password" placeholder="confirm password" autocomplete="off"
+                               tabindex="1" name="confirm" id="confirm"/>
+                        <br/>
+                        <br/>
+                        <label for="email">Email:</label>
+                        <input class="itxt" type="text" placeholder="email" autocomplete="off" tabindex="1" name="email"
+                               id="email"/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <input type="submit" value="Sign Up" id="sub_btn"/>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bottom">
+    <span>Bookstore.Copyright &copy;2021</span>
+</div>
+</body>
+</html>
