@@ -53,3 +53,11 @@ http response
 `text/template`
 
 `html/template`
+
+[template](src/webapp/chapter06_template/main.go)
+
+## Handle Static Source
+
+`StripPrefix` - remove prefix and handle use certain handler
+
+`FileServer`, `FileSystem`, `Dir`
