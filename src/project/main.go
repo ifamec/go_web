@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go_web/src/project/controller"
 	"html/template"
 	"net/http"
 )
@@ -15,5 +16,11 @@ func main()  {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("views/static/"))))
 	http.Handle("/pages/", http.StripPrefix("/pages/", http.FileServer(http.Dir("views/pages/"))))
 	http.HandleFunc("/main", IndexHandler)
+	// login
+	http.HandleFunc("/login", controller.Login)
+	// signup
+	http.HandleFunc("/signup", controller.Signup)
+
+
 	_ = http.ListenAndServe(":8000", nil)
 }
