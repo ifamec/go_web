@@ -22,6 +22,10 @@
                     return false;
                 }
             });
+            if ("{{.}}" !== "username, password invalid") {
+                $("#errorMsg").text("please provide username and password")
+                // $("#errorMsg").text("username, password invalid")
+            }
         });
     </script>
 </head>
@@ -41,22 +45,20 @@
             <div class="login_box">
                 <div class="tit">
                     <h1>Member</h1>
-                    <a href="signup.html">Sign up</a>
+                    <a href="pages/user/signup.html">Sign up</a>
                 </div>
                 <div class="msg_cont">
                     <b></b>
-                    <span class="errorMsg">Please provide username and password</span>
+                    <span class="errorMsg" id="errorMsg">{{.}}</span>
                 </div>
                 <div class="form">
-                    <form action="login_success.html" method="POST">
+                    <form action="/login" method="POST">
                         <label for="username">Username:</label>
-                        <input class="itxt" type="text" placeholder="username" autocomplete="off" tabindex="1"
-                               name="username" id="username"/>
+                        <input class="itxt" type="text" placeholder="username" autocomplete="off" tabindex="1" name="username" id="username"/>
                         <br/>
                         <br/>
                         <label for="password">Password:</label>
-                        <input class="itxt" type="password" placeholder="password" autocomplete="off" tabindex="1"
-                               name="password" id="password"/>
+                        <input class="itxt" type="password" placeholder="password" autocomplete="off" tabindex="1" name="password" id="password"/>
                         <br/>
                         <br/>
                         <br/>
