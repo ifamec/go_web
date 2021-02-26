@@ -1,7 +1,6 @@
 package dao
 
 import (
-	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"go_web/src/project/model"
 	"go_web/src/project/utils"
@@ -24,14 +23,12 @@ func UsernameAvailability(username string) (bool, error) {
 	sqlQuery := "select id,username,password,email from users where username = ?"
 
 	row := utils.Db.QueryRow(sqlQuery, username)
-	err := row.Err()
-	if err != nil {
-		if err == sql.ErrNoRows {
-			return true, nil
-		}
+	u := &model.User{}
+	err := row.Scan(&u.Id, &u.Username, &u.Password, &u.Email)
+	if u.Id > 0 {
 		return false, err
 	} else {
-		return false, nil
+		return true, err
 	}
 }
 

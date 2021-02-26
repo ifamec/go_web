@@ -9,7 +9,8 @@ import (
 func TestUser (t *testing.T) {
 	fmt.Println("Test - userdao.go")
 	t.Run("Login Validation", testLoginValidate)
-	t.Run("Username Availability", testUsernameAvailability)
+	t.Run("Username Availability True", testUsernameAvailabilityTrue)
+	t.Run("Username Availability False", testUsernameAvailabilityFalse)
 	t.Run("Create User", testCreateUser)
 }
 
@@ -23,13 +24,23 @@ func testLoginValidate(t *testing.T) {
 	}
 }
 
-func testUsernameAvailability(t *testing.T) {
-	isAvailable, err := UsernameAvailability("admin")
-	if err != nil && err != sql.ErrNoRows {
+func testUsernameAvailabilityTrue(t *testing.T) {
+	isAvailable, err := UsernameAvailability("random_username")
+	if err != nil && err == sql.ErrNoRows {
+		fmt.Println("Username 'random_username' availability:", isAvailable)
+	} else {
 		fmt.Println(err)
 		t.Fail()
+	}
+}
+
+func testUsernameAvailabilityFalse(t *testing.T) {
+	isAvailable, err := UsernameAvailability("admin")
+	if err == nil {
+		fmt.Println("Username 'random_username' availability:", isAvailable)
 	} else {
-		fmt.Println("Username 'admin' availability:", isAvailable)
+		fmt.Println(err)
+		t.Fail()
 	}
 }
 
