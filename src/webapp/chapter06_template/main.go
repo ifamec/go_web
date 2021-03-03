@@ -44,11 +44,36 @@ func handlerActionTemp(w http.ResponseWriter, r *http.Request)  {
 	_ = tp.Execute(w, "SHOW")
 }
 
+func handlerActionDefine(w http.ResponseWriter, r *http.Request)  {
+	tp := template.Must(template.ParseFiles("define.html"))
+	_ = tp.ExecuteTemplate(w, "model", "")
+}
+
+func handlerActionDefineS(w http.ResponseWriter, r *http.Request)  {
+	var content string
+	num := 12
+	if num <= 18 {
+		content = "define_content_1.html"
+	} else {
+		content = "define_content_2.html"
+	}
+	tp := template.Must(template.ParseFiles("define_.html", content))
+	_ = tp.ExecuteTemplate(w, "model", "")
+}
+
+func handlerActionBlock(w http.ResponseWriter, r *http.Request)  {
+	tp := template.Must(template.ParseFiles("block.html"))
+	_ = tp.ExecuteTemplate(w, "model", "")
+}
+
 func main() {
 	http.HandleFunc("/template", handlerTemplate02)
 	http.HandleFunc("/action_if", handlerActionIf)
 	http.HandleFunc("/action_range", handlerActionRange)
 	http.HandleFunc("/action_with", handlerActionWith)
 	http.HandleFunc("/action_temp", handlerActionTemp)
+	http.HandleFunc("/action_define", handlerActionDefine)
+	http.HandleFunc("/action_define_s", handlerActionDefineS)
+	http.HandleFunc("/action_block", handlerActionBlock)
 	_ = http.ListenAndServe(":8000", nil)
 }

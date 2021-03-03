@@ -109,3 +109,15 @@ No New Value {{.}}
 
 {{template "name" arg}}
 ```
+
+```go
+{{define "model"}}
+    {{template "content"}}
+{{end}}
+```
+
+```go
+{{block arg}}
+Show if not find
+{{end}}
+```
