@@ -61,3 +61,33 @@ http response
 `StripPrefix` - remove prefix and handle use certain handler
 
 `FileServer`, `FileSystem`, `Dir`
+
+## Action
+
+```go
+{{if arg}}
+    // actions
+{{end}}
+
+{{if arg}}
+    // action
+{{else}}
+    // action
+{{end}}
+```
+
+```go
+{{range .}}
+traverse {{.}}
+{{end}}
+
+
+{{range .}}
+traverse {{.}}
+{{else}}
+nothing
+{{end}}
+
+{{range $k, $v := .}}
+{{end}}
+```
