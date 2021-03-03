@@ -20,6 +20,8 @@ func main()  {
 	http.HandleFunc("/login", controller.Login)
 	// signup
 	http.HandleFunc("/signup", controller.Signup)
+	// check username
+	http.HandleFunc("/checkUsername", controller.CheckUsername)
 
 
 	_ = http.ListenAndServe(":8000", nil)

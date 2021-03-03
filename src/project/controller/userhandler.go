@@ -49,3 +49,14 @@ func Signup(w http.ResponseWriter, r *http.Request)  {
 		_ = t.Execute(w, "username exist")
 	}
 }
+// CheckUsername use ajax
+func CheckUsername(w http.ResponseWriter, r *http.Request)  {
+	username := r.PostFormValue("username")
+	isAvailable, _ := dao.UsernameAvailability(username)
+	if isAvailable {
+		_, _ = w.Write([]byte("<font style='color:green'>username valid</font>"))
+	} else {
+		_, _ = w.Write([]byte("username exist, retry"))
+	}
+
+}
