@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template</title>
+</head>
+<body>
+{{with "Apple"}}
+After Modify: {{.}} <br/>
+{{end}}
+
+<hr/>
+{{with ""}}
+After Modify: {{.}} <br/>
+{{else}}
+No Modify: {{.}}<br/>
+{{end}}
+
+</body>
+</html>

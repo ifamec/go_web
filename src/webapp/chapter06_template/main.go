@@ -34,9 +34,21 @@ func handlerActionRange(w http.ResponseWriter, r *http.Request)  {
 	_ = tp.Execute(w, empSlice)
 }
 
+func handlerActionWith(w http.ResponseWriter, r *http.Request)  {
+	tp := template.Must(template.ParseFiles("with.html"))
+	_ = tp.Execute(w, "Banana")
+}
+
+func handlerActionTemp(w http.ResponseWriter, r *http.Request)  {
+	tp := template.Must(template.ParseFiles("template.html", "template_sub.html"))
+	_ = tp.Execute(w, "SHOW")
+}
+
 func main() {
 	http.HandleFunc("/template", handlerTemplate02)
 	http.HandleFunc("/action_if", handlerActionIf)
 	http.HandleFunc("/action_range", handlerActionRange)
+	http.HandleFunc("/action_with", handlerActionWith)
+	http.HandleFunc("/action_temp", handlerActionTemp)
 	_ = http.ListenAndServe(":8000", nil)
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template</title>
+</head>
+<body>
+Data {{.}} <br/>
+
+Template template_sub: {{template "template_sub.html"}}<br/>
+<hr/>
+Send Data to template_sub<br/>
+{{template "template_sub.html" .}}<br/>
+
+</body>
+</html>

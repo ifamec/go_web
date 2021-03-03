@@ -91,3 +91,21 @@ nothing
 {{range $k, $v := .}}
 {{end}}
 ```
+
+```go
+{{with arg}}
+New Value is {{.}}
+{{end}}
+
+{{with arg}}
+New Value is {{.}}
+{{else}}
+No New Value {{.}}
+{{end}}
+```
+
+```go
+{{template "name"}}
+
+{{template "name" arg}}
+```
