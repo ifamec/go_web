@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>Book Manager</title>
     <link type="text/css" rel="stylesheet" href="/static/css/style.css">
+    <script type="text/javascript" src="/static/script/jquery-1.7.2.js"></script>
+    <script>
+        $(function() {
+            $(".deleteBook").click(function() {
+                const title = $(this).parent().siblings().first().text()
+                return confirm('Delete Book: ' + title + ' ?')
+            });
+        })
+    </script>
 </head>
 <body>
 
@@ -27,14 +36,14 @@
             <td colspan="2">Operation</td>
         </tr>
         {{range .}}
-        <tr>
+        <tr id="{{.Id}}">
             <td>{{.Title}}</td>
             <td>{{.Price}}</td>
             <td>{{.Author}}</td>
             <td>{{.Sales}}</td>
             <td>{{.Stock}}</td>
             <td><a href="/pages/manager/book_edit.html">Modify</a></td>
-            <td><a href="#">Delete</a></td>
+            <td><a class="deleteBook" href="/deleteBook?bookId={{.Id}}" >Delete</a></td>
         </tr>
         {{end}}
         <tr>

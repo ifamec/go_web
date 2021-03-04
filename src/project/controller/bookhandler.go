@@ -34,3 +34,10 @@ func AddBook(w http.ResponseWriter, r *http.Request)  {
 
 	GetBooks(w, r)
 }
+
+// DeleteBook
+func DeleteBook(w http.ResponseWriter, r *http.Request)  {
+	id, _ := strconv.Atoi(r.FormValue("bookId"))
+	_ = dao.DeleteBook(id)
+	GetBooks(w, r)
+}

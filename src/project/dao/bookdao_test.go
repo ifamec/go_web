@@ -11,6 +11,7 @@ func TestBook (t *testing.T) {
 	fmt.Println("Test - bookdao.go")
 	// t.Run("Get Books", testGetBooks)
 	t.Run("Add Book", testAddBook)
+	// t.Run("Delete Book", testDeleteBook)
 }
 
 func testGetBooks(t *testing.T) {
@@ -25,13 +26,20 @@ func testGetBooks(t *testing.T) {
 }
 func testAddBook(t *testing.T) {
 	err := AddBook(&model.Book{
-		Title: "Me Talk Pretty One Day",
+		Title: "Me Talk Pretty One Day - 2",
 		Author: "David Sedaris",
 		Price: 16.99,
 		Sales: 100,
 		Stock: 100,
 		ImgPath: "512DFet3JbL",
 	})
+	if err != nil {
+		fmt.Println(err)
+		t.Fail()
+	}
+}
+func testDeleteBook(t *testing.T) {
+	err := DeleteBook(34)
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()
