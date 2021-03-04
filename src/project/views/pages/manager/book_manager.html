@@ -11,7 +11,7 @@
     <img class="logo_img" alt="" src="/static/img/logo.gif">
     <span class="wel_word">Book Management System</span>
     <div>
-        <a href="/pages/manager/book_manager.html">Manage Book</a>
+        <a href="/pages/manager/book_manager.html">Manage Book</a> |
         <a href="/">Back To Store</a>
     </div>
 </div>
@@ -26,46 +26,17 @@
             <td>Stock</td>
             <td colspan="2">Operation</td>
         </tr>
+        {{range .}}
         <tr>
-            <td>A Brief History of Time</td>
-            <td>20.00</td>
-            <td>Stephen Hawking</td>
-            <td>200</td>
-            <td>400</td>
+            <td>{{.Title}}</td>
+            <td>{{.Price}}</td>
+            <td>{{.Author}}</td>
+            <td>{{.Sales}}</td>
+            <td>{{.Stock}}</td>
             <td><a href="/pages/manager/book_edit.html">Modify</a></td>
             <td><a href="#">Delete</a></td>
         </tr>
-
-        <tr>
-            <td>A Brief History of Time</td>
-            <td>20.00</td>
-            <td>Stephen Hawking</td>
-            <td>200</td>
-            <td>400</td>
-            <td><a href="book_edit.html">Modify</a></td>
-            <td><a href="#">Delete</a></td>
-        </tr>
-
-        <tr>
-            <td>A Brief History of Time</td>
-            <td>20.00</td>
-            <td>Stephen Hawking</td>
-            <td>200</td>
-            <td>400</td>
-            <td><a href="book_edit.html">Modify</a></td>
-            <td><a href="#">Delete</a></td>
-        </tr>
-
-        <tr>
-            <td>A Brief History of Time</td>
-            <td>20.00</td>
-            <td>Stephen Hawking</td>
-            <td>200</td>
-            <td>400</td>
-            <td><a href="book_edit.html">Modify</a></td>
-            <td><a href="#">Delete</a></td>
-        </tr>
-
+        {{end}}
         <tr>
             <td></td>
             <td></td>
