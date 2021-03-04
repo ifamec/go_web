@@ -19,3 +19,12 @@ func GetBooks() (books []*model.Book, err error) {
 	}
 	return
 }
+
+func AddBook(b *model.Book) (err error) {
+	sqlQuery := "insert into books (title,author,price,sales,stock,img_path) values(?,?,?,?,?,?)"
+	_, err = utils.Db.Exec(sqlQuery, b.Title, b.Author, b.Price, b.Sales, b.Stock, b.ImgPath)
+	if err != nil {
+		return
+	}
+	return nil
+}

@@ -24,6 +24,8 @@ func main()  {
 	http.HandleFunc("/checkUsername", controller.CheckUsername)
 	// get books
 	http.HandleFunc("/getBooks", controller.GetBooks)
+	// add book
+	http.HandleFunc("/addBook", controller.AddBook)
 
 
 	_ = http.ListenAndServe(":8000", nil)

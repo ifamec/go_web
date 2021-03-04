@@ -30,7 +30,7 @@
 </div>
 
 <div id="main">
-    <form action="/pages/manager/book_manager.html" method="POST">
+    <form action="/addBook" method="POST">
         <table>
             <tr>
                 <td>Name</td>
@@ -38,14 +38,16 @@
                 <td>Author</td>
                 <td>Sale Amount</td>
                 <td>Stock</td>
+                <td>Image</td>
                 <td colspan="2">Operation</td>
             </tr>
             <tr>
-                <td><label><input name="title" type="text" value="A Brief History of Time"/></label></td>
-                <td><label><input name="price" type="text" value="30.00"/></label></td>
-                <td><label><input name="author" type="text" value="Stephen Hawking"/></label></td>
-                <td><label><input name="sales" type="text" value="200"/></label></td>
-                <td><label><input name="stock" type="text" value="300"/></label></td>
+                <td><label><input name="title" type="text" value=""/></label></td>
+                <td><label><input name="price" type="text" value=""/></label></td>
+                <td><label><input name="author" type="text" value=""/></label></td>
+                <td><label><input name="sales" type="text" value=""/></label></td>
+                <td><label><input name="stock" type="text" value=""/></label></td>
+                <td><label><input name="img_path" type="text" value=""/></label></td>
                 <td><label><input type="submit" value="Submit"/></label></td>
             </tr>
         </table>
