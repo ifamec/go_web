@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Book Manager</title>
     <link type="text/css" rel="stylesheet" href="/static/css/style.css">
-    <script type="text/javascript" src="/static/script/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="/static/script/jquery-3.6.0.min.js"></script>
     <script>
-        $(function() {
-            $(".deleteBook").click(function() {
-                const title = $(this).parent().siblings().first().text()
+        $(() => {
+            $(".deleteBook").click((e) => {
+                const title = $(e.currentTarget).parent().siblings().first().text()
                 return confirm('Delete Book: ' + title + ' ?')
             });
         })

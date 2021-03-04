@@ -10,9 +10,9 @@
             margin-top: 25px;
         }
     </style>
-    <script src="/static/script/jquery-1.7.2.js"></script>
+    <script src="/static/script/jquery-3.6.0.min.js"></script>
     <script>
-        $(function () {
+        $(() => {
             $("#sub_btn").click(() => {
                 const username = $("#username").val();
                 if (!/^[a-zA-Z0-9_-]{3,16}$/.test(username)) {

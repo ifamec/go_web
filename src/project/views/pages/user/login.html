@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Login Page</title>
     <link type="text/css" rel="stylesheet" href="/static/css/style.css">
-    <script type="text/javascript" src="/static/script/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="/static/script/jquery-3.6.0.min.js"></script>
     <script>
         // window.onload = function(){};
-        $(function () {
-            $("#sub_btn").click(function () {
+        $(() => {
+            $("#sub_btn").click(() => {
                 // get user name
                 const username = $("#username").val();
                 if (username === "") {
