@@ -8,6 +8,16 @@ import (
 	"strconv"
 )
 
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	// get pageNumber
+	pageNumber, _ := strconv.Atoi(r.FormValue("pageNumber"))
+	if pageNumber == 0 { pageNumber = 1 }
+	// get page bools
+	page, _ := dao.GetPageBooks(pageNumber)
+	t := template.Must(template.ParseFiles("views/index.html"))
+	_ = t.Execute(w, page)
+}
+
 // GetBooks
 // func GetBooks(w http.ResponseWriter, r *http.Request)  {
 // 	books, _ := dao.GetBooks()

@@ -40,7 +40,7 @@ div{
 }
 
 .b_list{
-	height:300px;
+	height:420px;
 	width:250px;
 	float: left;
 	margin: 0 20px;
@@ -61,24 +61,28 @@ div{
 }
 
 .img_div{
-	height: 150px;
+	height: 220px;
 	text-align: center;
 }
 
 .book_img {
-	height:150px;
-	width:150px;
+	height:220px;
 }
 
 .book_info {
-	
+	height: 180px;
 	text-align: center;
 }
 
 .book_info div{
-	height: 10px;
-	width: 300px;
+	display: flex;
+	margin: 5px auto;
 	text-align: left;
+	justify-content: start;
+	align-content: space-between;
+}
+.book_info > div.book_add{
+	justify-content: center;
 }
 
 .wel_word{

@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <title>Book Store</title>
     <link type="text/css" rel="stylesheet" href="static/css/style.css">
+    <script type="text/javascript" src="/static/script/jquery-3.6.0.min.js"></script>
+    <script>
+        $(() => {
+            $("#sub").click(() => {
+                const pageNumber = $("#pn_input").val()
+                window.location.href = "/main?pageNumber=" + pageNumber
+            });
+
+        })
+    </script>
 </head>
 <body>
 
@@ -30,141 +40,50 @@
                 Add<span style="color: red">A Brief History of Time</span>to cart
             </div>
         </div>
+        {{range .Books}}
         <div class="b_list">
             <div class="img_div">
-                <img class="book_img" alt="" src="static/img/default.jpg"/>
+                <img class="book_img" alt="" src="https://m.media-amazon.com/images/I/{{.ImgPath}}.jpg"/>
             </div>
             <div class="book_info">
-                <div class="book_name">
-                    <span class="sp1">Book:</span>
-                    <span class="sp2">A Brief History of Time</span>
-                </div>
-                <div class="book_author">
-                    <span class="sp1">Author:</span>
-                    <span class="sp2">Stephen Hawking</span>
-                </div>
-                <div class="book_price">
-                    <span class="sp1">Price:</span>
-                    <span class="sp2">$30.00</span>
-                </div>
-                <div class="book_sales">
-                    <span class="sp1">Sale Amount:</span>
-                    <span class="sp2">230</span>
-                </div>
-                <div class="book_amount">
-                    <span class="sp1">Stock:</span>
-                    <span class="sp2">1000</span>
-                </div>
                 <div class="book_add">
                     <button>Add To Cart</button>
                 </div>
-            </div>
-        </div>
-
-        <div class="b_list">
-            <div class="img_div">
-                <img class="book_img" alt="" src="static/img/default.jpg"/>
-            </div>
-            <div class="book_info">
                 <div class="book_name">
-                    <span class="sp1">Book:</span>
-                    <span class="sp2">A Brief History of Time</span>
+                    <a><b>Title: </b>{{.Title}}</a>
                 </div>
                 <div class="book_author">
-                    <span class="sp1">Author:</span>
-                    <span class="sp2">Stephen Hawking</span>
+                    <a><b>Author: </b>{{.Author}}</a>
                 </div>
                 <div class="book_price">
-                    <span class="sp1">Price:</span>
-                    <span class="sp2">$30.00</span>
+                    <a><b>Price: </b>${{.Price}}</a>
                 </div>
                 <div class="book_sales">
-                    <span class="sp1">Sale Amount:</span>
-                    <span class="sp2">230</span>
+                    <a><b>Sale Amount: </b>{{.Sales}}</a>
                 </div>
                 <div class="book_amount">
-                    <span class="sp1">Stock:</span>
-                    <span class="sp2">1000</span>
-                </div>
-                <div class="book_add">
-                    <button>Add To Cart</button>
+                    <a><b>Stock: </b>{{.Stock}}</a>
                 </div>
             </div>
         </div>
-
-        <div class="b_list">
-            <div class="img_div">
-                <img class="book_img" alt="" src="static/img/default.jpg"/>
-            </div>
-            <div class="book_info">
-                <div class="book_name">
-                    <span class="sp1">Book:</span>
-                    <span class="sp2">A Brief History of Time</span>
-                </div>
-                <div class="book_author">
-                    <span class="sp1">Author:</span>
-                    <span class="sp2">Stephen Hawking</span>
-                </div>
-                <div class="book_price">
-                    <span class="sp1">Price:</span>
-                    <span class="sp2">$30.00</span>
-                </div>
-                <div class="book_sales">
-                    <span class="sp1">Sale Amount:</span>
-                    <span class="sp2">230</span>
-                </div>
-                <div class="book_amount">
-                    <span class="sp1">Stock:</span>
-                    <span class="sp2">1000</span>
-                </div>
-                <div class="book_add">
-                    <button>Add To Cart</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="b_list">
-            <div class="img_div">
-                <img class="book_img" alt="" src="static/img/default.jpg"/>
-            </div>
-            <div class="book_info">
-                <div class="book_name">
-                    <span class="sp1">Book:</span>
-                    <span class="sp2">A Brief History of Time</span>
-                </div>
-                <div class="book_author">
-                    <span class="sp1">Author:</span>
-                    <span class="sp2">Stephen Hawking</span>
-                </div>
-                <div class="book_price">
-                    <span class="sp1">Price:</span>
-                    <span class="sp2">$30.00</span>
-                </div>
-                <div class="book_sales">
-                    <span class="sp1">Sale Amount:</span>
-                    <span class="sp2">230</span>
-                </div>
-                <div class="book_amount">
-                    <span class="sp1">Stock:</span>
-                    <span class="sp2">1000</span>
-                </div>
-                <div class="book_add">
-                    <button>Add To Cart</button>
-                </div>
-            </div>
-        </div>
+        {{end}}
     </div>
 
     <div id="page_nav">
-        <a href="#">Home</a>
-        <a href="#">Prev</a>
-        <a href="#">3</a>
-        [4]
-        <a href="#">5</a>
-        <a href="#">Next</a>
-        <a href="#">End</a>
-        10 Page in Total, 30 Records, To Page<label><input value="4" name="pn" id="pn_input"/></label>
-        <input type="button" value="Go">
+        {{if .HasPrev}}
+        <a href="/main">Home</a>
+        <a href="/main?pageNumber={{.GetPrev}}">Prev</a>
+        {{end}}
+        {{.PageNumber}}
+        {{if .HasNext}}
+        <a href="/main?pageNumber={{.GetNext}}">Next</a>
+        <a href="/main?pageNumber={{.TotalPages}}">End</a>
+        {{end}}
+        <br/>
+        Total: {{.TotalPages}} Page{{if gt .TotalPages 1}}s{{end}},
+        Total: {{.TotalRecords}} Record{{if gt .TotalRecords 1}}s{{end}},
+        To Page<label><input value="{{.PageNumber}}" name="pn" id="pn_input"/></label>
+        <input type="button" value="Go" id="sub">
     </div>
 
 </div>
