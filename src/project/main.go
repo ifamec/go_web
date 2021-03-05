@@ -30,6 +30,8 @@ func main()  {
 	http.HandleFunc("/deleteBook", controller.DeleteBook)
 	// modify book
 	http.HandleFunc("/modifyBookPage", controller.ModifyBookPage)
+	// update book
+	http.HandleFunc("/updateBook", controller.UpdateBook)
 
 
 

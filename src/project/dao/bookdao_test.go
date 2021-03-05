@@ -13,6 +13,7 @@ func TestBook (t *testing.T) {
 	// t.Run("Add Book", testAddBook)
 	// t.Run("Delete Book", testDeleteBook)
 	t.Run("Get Book By Id", testGetBookById)
+	t.Run("Update Book", testUpdateBook)
 }
 
 func testGetBooks(t *testing.T) {
@@ -53,6 +54,21 @@ func testGetBookById(t *testing.T)  {
 		t.Fail()
 	} else {
 		fmt.Println(book)
+	}
+}
+func testUpdateBook(t *testing.T)  {
+	err := UpdateBook(&model.Book{
+		Id: 47,
+		Title: "Me Talk Pretty One Day - 47",
+		Author: "David Sedaris",
+		Price: 18.99,
+		Sales: 200,
+		Stock: 200,
+		ImgPath: "512DFet3JbL",
+	})
+	if err != nil {
+		fmt.Println(err)
+		t.Fail()
 	}
 }
 
