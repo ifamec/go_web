@@ -17,23 +17,23 @@ func GetBooks(w http.ResponseWriter, r *http.Request)  {
 }
 
 // AddBook
-func AddBook(w http.ResponseWriter, r *http.Request)  {
-
-	price, _ := strconv.ParseFloat(r.PostFormValue("price"), 64)
-	sales, _ := strconv.Atoi(r.PostFormValue("sales"))
-	stock, _ := strconv.Atoi(r.PostFormValue("stock"))
-
-	_ = dao.AddBook(&model.Book{
-		Title: r.PostFormValue("title"),
-		Author: r.PostFormValue("author"),
-		Price: price,
-		Sales: sales,
-		Stock: stock,
-		ImgPath: r.PostFormValue("img_path"),
-	})
-
-	GetBooks(w, r)
-}
+// func AddBook(w http.ResponseWriter, r *http.Request)  {
+//
+// 	price, _ := strconv.ParseFloat(r.PostFormValue("price"), 64)
+// 	sales, _ := strconv.Atoi(r.PostFormValue("sales"))
+// 	stock, _ := strconv.Atoi(r.PostFormValue("stock"))
+//
+// 	_ = dao.AddBook(&model.Book{
+// 		Title: r.PostFormValue("title"),
+// 		Author: r.PostFormValue("author"),
+// 		Price: price,
+// 		Sales: sales,
+// 		Stock: stock,
+// 		ImgPath: r.PostFormValue("img_path"),
+// 	})
+//
+// 	GetBooks(w, r)
+// }
 
 // DeleteBook
 func DeleteBook(w http.ResponseWriter, r *http.Request)  {
@@ -46,18 +46,25 @@ func DeleteBook(w http.ResponseWriter, r *http.Request)  {
 func ModifyBookPage(w http.ResponseWriter, r *http.Request)  {
 	id, _ := strconv.Atoi(r.FormValue("bookId"))
 	book, _ := dao.GetBookById(id)
-	tp := template.Must(template.ParseFiles("views/pages/manager/book_modify.html"))
-	_ = tp.Execute(w, book)
+	if book.Id > 0 {
+		// update book
+		tp := template.Must(template.ParseFiles("views/pages/manager/book_edit.html"))
+		_ = tp.Execute(w, book)
+	} else {
+		// add book
+		tp := template.Must(template.ParseFiles("views/pages/manager/book_edit.html"))
+		_ = tp.Execute(w, "")
+	}
 }
 
 // UpdateBook
-func UpdateBook(w http.ResponseWriter, r *http.Request) {
+func AddOrUpdateBook(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(r.PostFormValue("bookId"))
 	price, _ := strconv.ParseFloat(r.PostFormValue("price"), 64)
 	sales, _ := strconv.Atoi(r.PostFormValue("sales"))
 	stock, _ := strconv.Atoi(r.PostFormValue("stock"))
 
-	_ = dao.UpdateBook(&model.Book{
+	book := &model.Book{
 		Id:      id,
 		Title:   r.PostFormValue("title"),
 		Author:  r.PostFormValue("author"),
@@ -65,7 +72,12 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 		Sales:   sales,
 		Stock:   stock,
 		ImgPath: r.PostFormValue("img_path"),
-	})
+	}
+	if id > 0 {
+		_ = dao.UpdateBook(book)
+	} else {
+		_ = dao.AddBook(book)
+	}
 
 	GetBooks(w, r)
 }

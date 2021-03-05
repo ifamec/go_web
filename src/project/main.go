@@ -25,13 +25,13 @@ func main()  {
 	// get books
 	http.HandleFunc("/getBooks", controller.GetBooks)
 	// add book
-	http.HandleFunc("/addBook", controller.AddBook)
+	// http.HandleFunc("/addBook", controller.AddBook)
 	// delete book
 	http.HandleFunc("/deleteBook", controller.DeleteBook)
 	// modify book
 	http.HandleFunc("/modifyBookPage", controller.ModifyBookPage)
 	// update book
-	http.HandleFunc("/updateBook", controller.UpdateBook)
+	http.HandleFunc("/addOrUpdateBook", controller.AddOrUpdateBook)
 
 
 

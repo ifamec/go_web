@@ -22,15 +22,15 @@
 <body>
 <div id="header">
     <img class="logo_img" alt="" src="/static/img/logo.gif">
-    <span class="wel_word">Edit Book</span>
+    <span class="wel_word">Modify Book</span>
     <div>
-        <a href="/getBooks">Manage Book</a>
+        <a href="/getBooks">Manage Book</a> |
         <a href="/main">Back To Store</a>
     </div>
 </div>
 
 <div id="main">
-    <form action="/addBook" method="POST">
+    <form action="/addOrUpdateBook" method="POST">
         <table>
             <tr>
                 <td>Name</td>
@@ -42,12 +42,22 @@
                 <td colspan="2">Operation</td>
             </tr>
             <tr>
+                {{if .}}
+                <input type="hidden" name="bookId" value="{{.Id}}"/>
+                <td><label><input name="title" type="text" value="{{.Title}}"/></label></td>
+                <td><label><input name="price" type="text" value="{{.Price}}"/></label></td>
+                <td><label><input name="author" type="text" value="{{.Author}}"/></label></td>
+                <td><label><input name="sales" type="text" value="{{.Sales}}"/></label></td>
+                <td><label><input name="stock" type="text" value="{{.Stock}}"/></label></td>
+                <td><label><input name="img_path" type="text" value="{{.ImgPath}}"/></label></td>
+                {{else}}
                 <td><label><input name="title" type="text" value=""/></label></td>
                 <td><label><input name="price" type="text" value=""/></label></td>
                 <td><label><input name="author" type="text" value=""/></label></td>
                 <td><label><input name="sales" type="text" value=""/></label></td>
                 <td><label><input name="stock" type="text" value=""/></label></td>
                 <td><label><input name="img_path" type="text" value=""/></label></td>
+                {{end}}
                 <td><label><input type="submit" value="Submit"/></label></td>
             </tr>
         </table>
