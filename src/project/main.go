@@ -23,7 +23,7 @@ func main()  {
 	// check username
 	http.HandleFunc("/checkUsername", controller.CheckUsername)
 	// get books
-	http.HandleFunc("/getBooks", controller.GetBooks)
+	// http.HandleFunc("/getBooks", controller.GetBooks)
 	// add book
 	// http.HandleFunc("/addBook", controller.AddBook)
 	// delete book
@@ -32,6 +32,8 @@ func main()  {
 	http.HandleFunc("/modifyBookPage", controller.ModifyBookPage)
 	// update book
 	http.HandleFunc("/addOrUpdateBook", controller.AddOrUpdateBook)
+	// get page books
+	http.HandleFunc("/getPageBooks", controller.GetPageBooks)
 
 
 

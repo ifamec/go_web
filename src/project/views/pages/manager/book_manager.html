@@ -11,6 +11,11 @@
                 const title = $(e.currentTarget).parent().siblings().first().text()
                 return confirm('Delete Book: ' + title + ' ?')
             });
+            $("#sub").click(() => {
+                const pageNumber = $("#pn_input").val()
+                window.location.href = "/getPageBooks?pageNumber=" + pageNumber
+            });
+
         })
     </script>
 </head>
@@ -20,7 +25,7 @@
     <img class="logo_img" alt="" src="/static/img/logo.gif">
     <span class="wel_word">Book Management System</span>
     <div>
-        <a href="/getBooks">Manage Book</a> |
+        <a href="/getPageBooks">Manage Book</a> |
         <a href="/main">Back To Store</a>
     </div>
 </div>
@@ -35,7 +40,7 @@
             <td>Stock</td>
             <td colspan="2">Operation</td>
         </tr>
-        {{range .}}
+        {{range .Books}}
         <tr id="{{.Id}}">
             <td>{{.Title}}</td>
             <td>{{.Price}}</td>
@@ -56,8 +61,23 @@
             <td><a href="/modifyBookPage">Add</a></td>
         </tr>
     </table>
+    <div id="page_nav">
+        {{if .HasPrev}}
+        <a href="/getPageBooks">Home</a>
+        <a href="/getPageBooks?pageNumber={{.GetPrev}}">Prev</a>
+        {{end}}
+        {{.PageNumber}}
+        {{if .HasNext}}
+        <a href="/getPageBooks?pageNumber={{.GetNext}}">Next</a>
+        <a href="/getPageBooks?pageNumber={{.TotalPages}}">End</a>
+        {{end}}
+        <br/>
+        Total: {{.TotalPages}} Page{{if gt .TotalPages 1}}s{{end}},
+        Total: {{.TotalRecords}} Record{{if gt .TotalRecords 1}}s{{end}},
+        To Page<label><input value="{{.PageNumber}}" name="pn" id="pn_input"/></label>
+        <input type="button" value="Go" id="sub">
+    </div>
 </div>
-
 <div id="bottom">
     <span>Bookstore.Copyright &copy;2021</span>
 </div>

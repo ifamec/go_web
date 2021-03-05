@@ -9,12 +9,12 @@ import (
 )
 
 // GetBooks
-func GetBooks(w http.ResponseWriter, r *http.Request)  {
-	books, _ := dao.GetBooks()
-	// template
-	tp := template.Must(template.ParseFiles("views/pages/manager/book_manager.html"))
-	_ = tp.Execute(w, books)
-}
+// func GetBooks(w http.ResponseWriter, r *http.Request)  {
+// 	books, _ := dao.GetBooks()
+// 	// template
+// 	tp := template.Must(template.ParseFiles("views/pages/manager/book_manager.html"))
+// 	_ = tp.Execute(w, books)
+// }
 
 // AddBook
 // func AddBook(w http.ResponseWriter, r *http.Request)  {
@@ -39,7 +39,7 @@ func GetBooks(w http.ResponseWriter, r *http.Request)  {
 func DeleteBook(w http.ResponseWriter, r *http.Request)  {
 	id, _ := strconv.Atoi(r.FormValue("bookId"))
 	_ = dao.DeleteBook(id)
-	GetBooks(w, r)
+	GetPageBooks(w, r)
 }
 
 // ModifyBookPage
@@ -79,5 +79,17 @@ func AddOrUpdateBook(w http.ResponseWriter, r *http.Request) {
 		_ = dao.AddBook(book)
 	}
 
-	GetBooks(w, r)
+	GetPageBooks(w, r)
+}
+
+// GetPageBooks
+func GetPageBooks(w http.ResponseWriter, r *http.Request)  {
+	// get pageNumber
+	pageNumber, _ := strconv.Atoi(r.FormValue("pageNumber"))
+	if pageNumber == 0 { pageNumber = 1 }
+	// get page bools
+	page, _ := dao.GetPageBooks(pageNumber)
+	// template
+	tp := template.Must(template.ParseFiles("views/pages/manager/book_manager.html"))
+	_ = tp.Execute(w, page)
 }
