@@ -10,8 +10,9 @@ import (
 func TestBook (t *testing.T) {
 	fmt.Println("Test - bookdao.go")
 	// t.Run("Get Books", testGetBooks)
-	t.Run("Add Book", testAddBook)
+	// t.Run("Add Book", testAddBook)
 	// t.Run("Delete Book", testDeleteBook)
+	t.Run("Get Book By Id", testGetBookById)
 }
 
 func testGetBooks(t *testing.T) {
@@ -43,6 +44,15 @@ func testDeleteBook(t *testing.T) {
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()
+	}
+}
+func testGetBookById(t *testing.T)  {
+	book, err := GetBookById(1)
+	if err != nil {
+		fmt.Println(err)
+		t.Fail()
+	} else {
+		fmt.Println(book)
 	}
 }
 

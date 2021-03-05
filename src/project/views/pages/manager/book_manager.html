@@ -42,7 +42,7 @@
             <td>{{.Author}}</td>
             <td>{{.Sales}}</td>
             <td>{{.Stock}}</td>
-            <td><a href="/pages/manager/book_edit.html">Modify</a></td>
+            <td><a href="/modifyBookPage?bookId={{.Id}}">Modify</a></td>
             <td><a class="deleteBook" href="/deleteBook?bookId={{.Id}}" >Delete</a></td>
         </tr>
         {{end}}

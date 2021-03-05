@@ -41,3 +41,11 @@ func DeleteBook(w http.ResponseWriter, r *http.Request)  {
 	_ = dao.DeleteBook(id)
 	GetBooks(w, r)
 }
+
+// ModifyBookPage
+func ModifyBookPage(w http.ResponseWriter, r *http.Request)  {
+	id, _ := strconv.Atoi(r.FormValue("bookId"))
+	book, _ := dao.GetBookById(id)
+	tp := template.Must(template.ParseFiles("views/pages/manager/book_modify.html"))
+	_ = tp.Execute(w, book)
+}
