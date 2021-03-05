@@ -51,3 +51,39 @@ func UpdateBook(b *model.Book) (err error) {
 	_, err = utils.Db.Exec(sqlQuery, b.Title, b.Author, b.Price, b.Sales, b.Stock, b.Id)
 	return
 }
+
+func GetPageBooks(pageNumber int) (page *model.Page, err error) {
+	// get total records
+	sqlQuery := "select count(*) from books"
+	var totalRecords int
+	row := utils.Db.QueryRow(sqlQuery)
+	err = row.Scan(&totalRecords)
+	// set up page size
+	var pageSize int = 4
+	// get pages
+	var totalPages int = totalRecords / pageSize
+	if totalRecords % pageSize != 0 {
+		totalPages += 1
+	}
+	// get books in current page
+	sqlGetBooks := "select id,title,author,price,sales,stock,img_path from books limit ?,?"
+	rows, err := utils.Db.Query(sqlGetBooks, (pageNumber-1)*pageSize, pageSize)
+	if err != nil {
+		return nil, err
+	}
+	var books []*model.Book = make([]*model.Book, 0)
+	for rows.Next() {
+		book := &model.Book{}
+		err = rows.Scan(&book.Id, &book.Title, &book.Author, &book.Price, &book.Sales, &book.Stock, &book.ImgPath)
+		books = append(books, book)
+	}
+	// page
+	page = &model.Page{
+		Books:        books,
+		PageNumber:   pageNumber,
+		PageSize:     pageSize,
+		TotalPages:   totalPages,
+		TotalRecords: totalRecords,
+	}
+	return
+}

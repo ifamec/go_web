@@ -63,3 +63,9 @@ INSERT INTO books (title,author,price,sales,stock,img_path) VALUES('Little House
 INSERT INTO books (title,author,price,sales,stock,img_path) VALUES('Love in the Time of Cholera (Oprah\'s Book Club)', 'Gabriel Garcia Marquez', 16.95,100,100,'41+HorgT4YL');
 INSERT INTO books (title,author,price,sales,stock,img_path) VALUES('Love Medicine: Newly Revised Edition (P.S.)', 'Louise Erdrich', 16.99,100,100,'41LZMNiu3xL');
 INSERT INTO books (title,author,price,sales,stock,img_path) VALUES('Man\'s Search for Meaning', 'Viktor E. Frankl', 15.00,100,100,'41nLuZrSbNL');
+
+
+-- currentPageNumber, pageSize = limit (pageNumber-1)*pageSize pageSize
+select * from books limit 0, 4;
+select * from books limit 4, 4;
+select * from books limit 8, 4;
