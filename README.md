@@ -134,7 +134,13 @@ Show if not find
 - Cons
   - Size Limit
   - Privacy
-  
+
+### Session
+
+1. Server side session w UUID
+2. Cookie to save UUID
+3. Use UUID Cookie get the session
+
 
 
 
