@@ -128,5 +128,13 @@ Show if not find
 ### Cookie
 `net/http`
 
+- Pros
+  - Ads
+  - Keep Login
+- Cons
+  - Size Limit
+  - Privacy
+  
+
 
 
