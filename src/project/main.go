@@ -29,6 +29,8 @@ func main()  {
 	http.HandleFunc("/addOrUpdateBook", controller.AddOrUpdateBook)
 	// get page books
 	http.HandleFunc("/getPageBooks", controller.GetPageBooks)
+	// get page books by price
+	http.HandleFunc("/getPageBooksByPrice", controller.GetPageBooksByPrice)
 
 
 

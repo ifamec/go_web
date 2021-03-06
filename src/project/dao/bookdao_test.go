@@ -14,7 +14,8 @@ func TestBook (t *testing.T) {
 	// t.Run("Delete Book", testDeleteBook)
 	// t.Run("Get Book By Id", testGetBookById)
 	// t.Run("Update Book", testUpdateBook)
-	t.Run("Get Page Books", testGetPageBooks)
+	// t.Run("Get Page Books", testGetPageBooks)
+	t.Run("Get Page Books By Price", testGetPageBooksByPrice)
 }
 
 func testGetBooks(t *testing.T) {
@@ -72,8 +73,8 @@ func testUpdateBook(t *testing.T)  {
 		t.Fail()
 	}
 }
-func testGetPageBooks(t *testing.T)  {
-	page, err := GetPageBooks(9)
+func testGetPageBooksByPrice(t *testing.T)  {
+	page, err := GetPageBooksByPrice(5, 15.99, 20.01)
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()

@@ -9,7 +9,7 @@
         $(() => {
             $("#sub").click(() => {
                 const pageNumber = $("#pn_input").val()
-                window.location.href = "/main?pageNumber=" + pageNumber
+                window.location.href = "/getPageBooksByPrice?pageNumber=" + pageNumber + "&min={{.PriceMin}}&max={{.PriceMax}}"
             });
 
         })
@@ -31,8 +31,10 @@
 <div id="main">
     <div id="book">
         <div class="book_cond">
-            Price：$ <label><input type="text" name="min"></label> - $ <label><input type="text" name="max"></label>
-            <button>Search</button>
+            <form action="/getPageBooksByPrice" method="post">
+                Price：$ <label><input type="number" name="min" step="0.01"></label> - $ <label><input type="number" name="max" step="0.01"></label>
+                <button>Search</button>
+            </form>
         </div>
         <div style="text-align: center">
             <span>3 items in cart</span>
@@ -71,13 +73,13 @@
 
     <div id="page_nav">
         {{if .HasPrev}}
-        <a href="/main">Home</a>
-        <a href="/main?pageNumber={{.GetPrev}}">Prev</a>
+        <a href="/getPageBooksByPrice?min={{.PriceMin}}&max={{.PriceMax}}">Home</a>
+        <a href="/getPageBooksByPrice?pageNumber={{.GetPrev}}&min={{.PriceMin}}&max={{.PriceMax}}">Prev</a>
         {{end}}
         {{.PageNumber}}
         {{if .HasNext}}
-        <a href="/main?pageNumber={{.GetNext}}">Next</a>
-        <a href="/main?pageNumber={{.TotalPages}}">End</a>
+        <a href="/getPageBooksByPrice?pageNumber={{.GetNext}}&min={{.PriceMin}}&max={{.PriceMax}}">Next</a>
+        <a href="/getPageBooksByPrice?pageNumber={{.TotalPages}}&min={{.PriceMin}}&max={{.PriceMax}}">End</a>
         {{end}}
         <br/>
         Total: {{.TotalPages}} Page{{if gt .TotalPages 1}}s{{end}},

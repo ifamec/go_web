@@ -49,9 +49,9 @@
             if ("{{.}}" === "username exist") {
                 $("#errorMsg").show()
             }
-            $("#username").focusout(function () { // validate username
+            $("#username").focusout((e) => { // validate username
                 const url = "/checkUsername"
-                const params = { "username": $(this).val() }
+                const params = { "username": $(e.currentTarget).val() }
                 $.post(url, params, (res) => {
                     $("#errorMsg").show()
                     $("#errorMsg").html(res)

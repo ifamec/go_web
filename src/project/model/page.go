@@ -6,6 +6,8 @@ type Page struct {
 	PageSize     int     // page size
 	TotalPages   int     // total pages - calc
 	TotalRecords int     // total records - from db
+	PriceMin     float64
+	PriceMax     float64
 }
 
 func (p *Page) HasPrev() bool {
