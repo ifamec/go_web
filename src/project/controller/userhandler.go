@@ -2,6 +2,8 @@ package controller
 
 import (
 	"go_web/src/project/dao"
+	"go_web/src/project/model"
+	"go_web/src/project/utils"
 	"html/template"
 	"net/http"
 )
@@ -16,8 +18,19 @@ func Login(w http.ResponseWriter, r *http.Request)  {
 	user, _ := dao.LoginValidate(username, password)
 	if user.Id != 0 {
 		// login success
+		uuid := utils.CreateUUID()
+		_ = dao.AddSession(&model.Session{
+			SessionId: uuid,
+			Username:  user.Username,
+			UserId:    user.Id,
+		})
+		http.SetCookie(w, &http.Cookie{
+			Name:     "user",
+			Value:    uuid,
+			HttpOnly: true,
+		})
 		t := template.Must(template.ParseFiles("views/pages/user/login_success.html"))
-		_ = t.Execute(w, "")
+		_ = t.Execute(w, user)
 	} else {
 		// error
 		t := template.Must(template.ParseFiles("views/pages/user/login.html"))
