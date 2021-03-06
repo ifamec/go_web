@@ -56,14 +56,15 @@ http response
 
 [template](src/webapp/chapter06_template/main.go)
 
-## Handle Static Source
+### Handle Static Source
 
 `StripPrefix` - remove prefix and handle use certain handler
 
 `FileServer`, `FileSystem`, `Dir`
 
-## Action
+### Action
 
+[action](src/webapp/chapter06_template/main.go)
 ```go
 {{if arg}}
     // actions
@@ -121,3 +122,11 @@ No New Value {{.}}
 Show if not find
 {{end}}
 ```
+
+## Session
+
+### Cookie
+`net/http`
+
+
+
