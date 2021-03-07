@@ -8,12 +8,10 @@ import (
 )
 
 func TestCart(t *testing.T) {
-	fmt.Println("Test - cartdao.go, cartitemsdao.go")
+	fmt.Println("Test - cartdao.go")
 	t.Run("Add Cart", testAddCart)
 }
 
-// 1,1984 (Signet Classics),George Orwell,9.99,100,100,41aM4xOZxaL
-// 2,A Brief History of Time,Stephen Hawking,18,100,100,51+GySc8ExL
 func testAddCart(t *testing.T) {
 	book1 := &model.Book{Id: 1, Price: 9.99}
 	book2 := &model.Book{Id: 2, Price: 18.00}
