@@ -10,7 +10,7 @@ func main()  {
 	// handle static content
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("views/static/"))))
 	http.Handle("/pages/", http.StripPrefix("/pages/", http.FileServer(http.Dir("views/pages/"))))
-	http.HandleFunc("/main", controller.IndexHandler)
+	http.HandleFunc("/main", controller.GetPageBooksByPrice)
 	// login
 	http.HandleFunc("/login", controller.Login)
 	// signup

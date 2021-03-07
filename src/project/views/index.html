@@ -20,12 +20,21 @@
 <div id="header">
     <img class="logo_img" alt="" src="static/img/logo.gif">
     <span class="wel_word">Online Bookstore</span>
+    {{if eq .Username ""}}
     <div>
         <a href="/pages/user/login.html">Login</a> |
         <a href="/pages/user/signup.html">Signup</a> |
         <a href="/pages/cart/cart.html">Cart</a> |
         <a href="/pages/manager/manager.html">Manager</a>
     </div>
+    {{else}}
+    <div>
+        <span>Welcome <span class="um_span">{{.Username}}</span></span>
+        <a href="/pages/cart/cart.html">Cart</a>&nbsp;
+        <a href="/">Logout</a>&nbsp;&nbsp;
+        <a href="/main">Back</a>
+    </div>
+    {{end}}
 </div>
 
 <div id="main">

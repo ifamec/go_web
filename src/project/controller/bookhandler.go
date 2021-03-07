@@ -119,6 +119,15 @@ func GetPageBooksByPrice(w http.ResponseWriter, r *http.Request)  {
 		page.PriceMin = priceMin
 		page.PriceMax = priceMax
 	}
+	// get cookie
+	cookie, _ := r.Cookie("user")
+	if cookie != nil {
+		sessionId := cookie.Value
+		session, _ := dao.GetSession(sessionId)
+		if session.UserId != 0 {
+			page.Username = session.Username
+		}
+	}
 	// template
 	tp := template.Must(template.ParseFiles("views/index.html"))
 	_ = tp.Execute(w, page)

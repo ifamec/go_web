@@ -8,6 +8,7 @@ type Page struct {
 	TotalRecords int     // total records - from db
 	PriceMin     float64
 	PriceMax     float64
+	Username     string
 }
 
 func (p *Page) HasPrev() bool {
