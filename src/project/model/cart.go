@@ -10,7 +10,7 @@ type Cart struct {
 
 func (c *Cart) GetTotalAmount() (tamount float64) {
 	for _, v := range c.CartItems {
-		tamount += v.Amount
+		tamount += v.GetAmount()
 	}
 	return
 }
