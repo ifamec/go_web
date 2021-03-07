@@ -12,25 +12,30 @@ func AddCartItem(cartItem *model.CartItem) (err error) {
 	return
 }
 
-func GetCartItemByBookId(bookId int, cartId string) (cartItem *model.CartItem, err error) {
+func GetCartItemByBookIdCartId(bookId int, cartId string) (cartItem *model.CartItem, err error) {
 	sqlQuery := "select id,count,amount,cart_id from cart_items where book_id = ? and cart_id = ?"
 	row := utils.Db.QueryRow(sqlQuery, bookId, cartId)
 	cartItem = &model.CartItem{}
 	err = row.Scan(&cartItem.CartItemId, &cartItem.Count, &cartItem.Amount, &cartItem.CartId)
+	if err != nil {
+		return nil, err
+	}
 	return
 }
 func GetCartItemsByCartId(cartId string) (cartItems []*model.CartItem, err error) {
-	sqlQuery := "select id,count,amount,cart_id from cart_items where cart_id = ?"
+	sqlQuery := "select id,count,amount,book_id,cart_id from cart_items where cart_id = ?"
 	row, err := utils.Db.Query(sqlQuery, cartId)
 	if err != nil {
 		return nil, err
 	}
 	for row.Next() {
+		var bookId int
 		cartItem := &model.CartItem{}
-		err = row.Scan(&cartItem.CartItemId, &cartItem.Count, &cartItem.Amount, &cartItem.CartId)
+		err = row.Scan(&cartItem.CartItemId, &cartItem.Count, &cartItem.Amount, &bookId, &cartItem.CartId)
 		if err != nil {
 			return nil, err
 		}
+		cartItem.Book, _ = GetBookById(bookId)
 		cartItems = append(cartItems, cartItem)
 	}
 	return

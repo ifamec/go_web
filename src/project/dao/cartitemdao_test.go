@@ -8,12 +8,12 @@ import (
 
 func TestCartItem(t *testing.T) {
 	fmt.Println("Test - cartitemdao.go")
-	t.Run("Get Cart Item By BookId", testGetCartItemByBookId)
+	t.Run("Get Cart Item By BookId CartId", testGetCartItemByBookId)
 	t.Run("Get Cart Items By CartId", testGetCartItemsByCartId)
 }
 
 func testGetCartItemByBookId(t *testing.T)  {
-	cartItem, err := GetCartItemByBookId(2, "1234")
+	cartItem, err := GetCartItemByBookIdCartId(1, "b6891c8b-35c1-4e23-5e45-a8a82da711f8")
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()

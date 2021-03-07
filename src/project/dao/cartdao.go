@@ -30,3 +30,9 @@ func GetCartByUserId(userId int) (cart *model.Cart, err error) {
 
 	return
 }
+
+func UpdateCart(cart *model.Cart) (err error) {
+	sqlQuery := "update carts set total_count = ?, total_amount = ? where id = ?"
+	_, err = utils.Db.Exec(sqlQuery, cart.GetTotalCount(), cart.GetTotalAmount(), cart.CartId)
+	return
+}

@@ -21,7 +21,19 @@ func AddBookToCart(w http.ResponseWriter, r *http.Request)  {
 	userId := session.UserId
 	cart, _ := dao.GetCartByUserId(userId)
 	if cart != nil {
+		cartItem , _ := dao.GetCartItemByBookIdCartId(bookId, cart.CartId)
+		if cartItem != nil { // book exist, count++
 
+		} else { // new book
+			newBook := &model.CartItem{
+				Book: book,
+				Count: 1,
+				CartId: cart.CartId,
+			}
+			cart.CartItems = append(cart.CartItems, newBook)
+			_ = dao.AddCartItem(newBook)
+		}
+		_ = dao.UpdateCart(cart)
 	} else {
 		// create a cart
 		CartId := utils.CreateUUID()
