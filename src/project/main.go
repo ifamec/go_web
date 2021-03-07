@@ -13,6 +13,8 @@ func main()  {
 	http.HandleFunc("/main", controller.GetPageBooksByPrice)
 	// login
 	http.HandleFunc("/login", controller.Login)
+	// logout
+	http.HandleFunc("/logout", controller.Logout)
 	// signup
 	http.HandleFunc("/signup", controller.Signup)
 	// check username

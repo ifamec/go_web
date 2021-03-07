@@ -37,6 +37,19 @@ func Login(w http.ResponseWriter, r *http.Request)  {
 		_ = t.Execute(w, "username or password invalid")
 	}
 }
+// Logout
+func Logout(w http.ResponseWriter, r *http.Request)  {
+	// get cookie
+	cookie, _ := r.Cookie("user")
+	if cookie != nil {
+		_ = dao.DeleteSession(cookie.Value)
+		// expire cookie
+		cookie.MaxAge = -1
+		http.SetCookie(w, cookie)
+	}
+	GetPageBooksByPrice(w, r)
+}
+
 // Signup
 func Signup(w http.ResponseWriter, r *http.Request)  {
 	// get username password
