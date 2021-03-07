@@ -2,6 +2,7 @@ create database bookstore;
 use bookstore;
 show tables;
 
+-- users
 create table users
 (
     id       int primary key auto_increment,
@@ -9,7 +10,6 @@ create table users
     PASSWORD varchar(100) not null,
     email    varchar(100)
 );
-
 
 insert into users(username, PASSWORD, email) values('admin', '12345678', 'admin@panda.com');
 
@@ -19,7 +19,7 @@ delete from users where username = 'test_user_01';
 drop table users;
 
 
-
+-- books
 create table books
 (
     id       int primary key auto_increment,
@@ -69,3 +69,16 @@ INSERT INTO books (title,author,price,sales,stock,img_path) VALUES('Man\'s Searc
 select * from books limit 0, 4;
 select * from books limit 4, 4;
 select * from books limit 8, 4;
+
+select count(*) from books;
+
+-- session
+create table sessions
+(
+    session_id varchar(100) primary key,
+    username   varchar(100) not null,
+    user_id    int not null,
+    foreign key (user_id) references users(id)
+);
+
+select * from sessions;
