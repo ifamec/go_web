@@ -12,9 +12,9 @@ func AddCartItem(cartItem *model.CartItem) (err error) {
 	return
 }
 
-func GetCartItemByBookId(bookId int) (cartItem *model.CartItem, err error) {
-	sqlQuery := "select id,count,amount,cart_id from cart_items where id = ?"
-	row := utils.Db.QueryRow(sqlQuery, bookId)
+func GetCartItemByBookId(bookId int, cartId string) (cartItem *model.CartItem, err error) {
+	sqlQuery := "select id,count,amount,cart_id from cart_items where book_id = ? and cart_id = ?"
+	row := utils.Db.QueryRow(sqlQuery, bookId, cartId)
 	cartItem = &model.CartItem{}
 	err = row.Scan(&cartItem.CartItemId, &cartItem.Count, &cartItem.Amount, &cartItem.CartId)
 	return

@@ -17,3 +17,16 @@ func AddCart(cart *model.Cart) (err error) {
 	}
 	return
 }
+
+func GetCartByUserId(userId int) (cart *model.Cart, err error) {
+	sqlQuery := "select id,total_count,total_amount,user_id from carts where user_id = ?"
+	row := utils.Db.QueryRow(sqlQuery, userId)
+	cart = &model.Cart{}
+	err = row.Scan(&cart.CartId, &cart.TotalCount, &cart.TotalAmount, &cart.UserId)
+	if err != nil {
+		return nil, err
+	}
+	cart.CartItems, err = GetCartItemsByCartId(cart.CartId)
+
+	return
+}

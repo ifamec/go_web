@@ -13,7 +13,7 @@ func TestCartItem(t *testing.T) {
 }
 
 func testGetCartItemByBookId(t *testing.T)  {
-	cartItem, err := GetCartItemByBookId(2)
+	cartItem, err := GetCartItemByBookId(2, "1234")
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()
