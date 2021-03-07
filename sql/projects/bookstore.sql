@@ -82,3 +82,28 @@ create table sessions
 );
 
 select * from sessions;
+
+
+-- cart
+create table carts
+(
+    id           varchar(100) primary key,
+    total_count  int    not null,
+    total_amount double not null,
+    user_id      int    not null,
+    foreign key (user_id) references users (id)
+);
+select * from carts;
+
+-- cartItems
+create table cart_items
+(
+    id      int primary key auto_increment,
+    COUNT   int not null,
+    amount  double not null,
+    book_id int not null,
+    cart_id varchar(100) not null,
+    foreign key (book_id) references books(id),
+    foreign key (cart_id) references carts(id)
+);
+select * from cart_items;
