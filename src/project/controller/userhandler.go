@@ -10,6 +10,11 @@ import (
 
 // Login
 func Login(w http.ResponseWriter, r *http.Request)  {
+	// if already login
+	if isLogin, _ := dao.IsLogin(r); isLogin {
+		GetPageBooksByPrice(w, r)
+		return
+	}
 	// get username password
 	username := r.PostFormValue("username")
 	password := r.PostFormValue("password")

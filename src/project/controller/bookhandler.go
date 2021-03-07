@@ -8,15 +8,15 @@ import (
 	"strconv"
 )
 
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	// get pageNumber
-	pageNumber, _ := strconv.Atoi(r.FormValue("pageNumber"))
-	if pageNumber == 0 { pageNumber = 1 }
-	// get page bools
-	page, _ := dao.GetPageBooks(pageNumber)
-	t := template.Must(template.ParseFiles("views/index.html"))
-	_ = t.Execute(w, page)
-}
+// func IndexHandler(w http.ResponseWriter, r *http.Request) {
+// 	// get pageNumber
+// 	pageNumber, _ := strconv.Atoi(r.FormValue("pageNumber"))
+// 	if pageNumber == 0 { pageNumber = 1 }
+// 	// get page bools
+// 	page, _ := dao.GetPageBooks(pageNumber)
+// 	t := template.Must(template.ParseFiles("views/index.html"))
+// 	_ = t.Execute(w, page)
+// }
 
 // GetBooks
 // func GetBooks(w http.ResponseWriter, r *http.Request)  {
@@ -119,14 +119,9 @@ func GetPageBooksByPrice(w http.ResponseWriter, r *http.Request)  {
 		page.PriceMin = priceMin
 		page.PriceMax = priceMax
 	}
-	// get cookie
-	cookie, _ := r.Cookie("user")
-	if cookie != nil {
-		sessionId := cookie.Value
-		session, _ := dao.GetSession(sessionId)
-		if session.UserId != 0 {
-			page.Username = session.Username
-		}
+	// check login
+	if isLogin, username := dao.IsLogin(r); isLogin {
+		page.Username = username
 	}
 	// template
 	tp := template.Must(template.ParseFiles("views/index.html"))

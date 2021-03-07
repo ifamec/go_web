@@ -4,6 +4,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"go_web/src/project/model"
 	"go_web/src/project/utils"
+	"net/http"
 )
 
 func AddSession(session *model.Session) (err error) {
@@ -26,4 +27,16 @@ func DeleteSession(sessionId string) (err error) {
 	sqlQuery := "delete from sessions where session_id = ?"
 	_, err = utils.Db.Exec(sqlQuery, sessionId)
 	return
+}
+func IsLogin(r *http.Request) (bool, string) {
+	// get cookie
+	cookie, _ := r.Cookie("user")
+	if cookie != nil {
+		sessionId := cookie.Value
+		session, _ := GetSession(sessionId)
+		if session.UserId > 0 {
+			return true, session.Username
+		}
+	}
+	return false, ""
 }
