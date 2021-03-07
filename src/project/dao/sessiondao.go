@@ -28,15 +28,15 @@ func DeleteSession(sessionId string) (err error) {
 	_, err = utils.Db.Exec(sqlQuery, sessionId)
 	return
 }
-func IsLogin(r *http.Request) (bool, string) {
+func IsLogin(r *http.Request) (bool, *model.Session) {
 	// get cookie
 	cookie, _ := r.Cookie("user")
 	if cookie != nil {
 		sessionId := cookie.Value
 		session, _ := GetSession(sessionId)
 		if session.UserId > 0 {
-			return true, session.Username
+			return true, session
 		}
 	}
-	return false, ""
+	return false, nil
 }

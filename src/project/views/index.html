@@ -11,6 +11,12 @@
                 const pageNumber = $("#pn_input").val()
                 window.location.href = "/getPageBooksByPrice?pageNumber=" + pageNumber + "&min={{.PriceMin}}&max={{.PriceMax}}"
             });
+            $(".addBookToCart").click((e) => {
+                const bookId = e.currentTarget.id
+                $.post("/addBookToCart", {"bookId": bookId}, (res) => {
+                    console.log(bookId)
+                })
+            });
 
         })
     </script>
@@ -58,7 +64,7 @@
             </div>
             <div class="book_info">
                 <div class="book_add">
-                    <button>Add To Cart</button>
+                    <button class="addBookToCart" id="{{.Id}}">Add To Cart</button>
                 </div>
                 <div class="book_name">
                     <a><b>Title: </b>{{.Title}}</a>

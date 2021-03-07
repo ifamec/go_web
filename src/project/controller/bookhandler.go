@@ -120,8 +120,8 @@ func GetPageBooksByPrice(w http.ResponseWriter, r *http.Request)  {
 		page.PriceMax = priceMax
 	}
 	// check login
-	if isLogin, username := dao.IsLogin(r); isLogin {
-		page.Username = username
+	if isLogin, session := dao.IsLogin(r); isLogin {
+		page.Username = session.Username
 	}
 	// template
 	tp := template.Must(template.ParseFiles("views/index.html"))
