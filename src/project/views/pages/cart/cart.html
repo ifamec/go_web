@@ -18,11 +18,16 @@
         $(() => {
             $("#clearCart").click(() => {
                 return confirm("Clear All In Cart?")
-            });
+            })
             $(".deleteCartItem").click((e) => {
                 const title = $(e.currentTarget).parent().siblings().first().text()
                 return confirm(`Delete ${title}?`)
-            });
+            })
+            $(".updateCount").change((e) => {
+                const cartItemId = e.currentTarget.id
+                const value = e.currentTarget.value
+                window.location.href = "/updateCartItem?cartItemId=" + cartItemId + "&bookCount=" + value
+            })
         });
     </script>
 </head>
@@ -61,7 +66,7 @@
         {{range .CartItems}}
         <tr>
             <td>{{.Book.Title}}</td>
-            <td>{{.Count}}</td>
+            <td><label><input id="{{.CartItemId}}" class="updateCount" type="number" value="{{.Count}}" style="width: 50px;height: 25px"/></label></td>
             <td>{{.Book.Price}}</td>
             <td>{{.Amount}}</td>
             <td><a class="deleteCartItem" href="/deleteCartItem?cartItemId={{.CartItemId}}">Delete</a></td>

@@ -110,3 +110,22 @@ func DeleteCartItem(w http.ResponseWriter, r *http.Request)  {
 	_ = dao.UpdateCart(cart)
 	GetCartInfo(w, r)
 }
+
+func UpdateCartItem(w http.ResponseWriter, r *http.Request)  {
+	cartItemId, err := strconv.Atoi(r.FormValue("cartItemId"))
+	bookCount, err := strconv.Atoi(r.FormValue("bookCount"))
+	if err != nil { return }
+	_, session := dao.IsLogin(r)
+	userId := session.UserId
+	cart, _ := dao.GetCartByUserId(userId)
+	cartItems := cart.CartItems
+	for _, v := range cartItems {
+		if cartItemId == v.CartItemId {
+			// update from slice
+			v.Count = bookCount
+			_ = dao.UpdateBookCount(v, v.Book.Id, v.CartId)
+		}
+	}
+	_ = dao.UpdateCart(cart)
+	GetCartInfo(w, r)
+}
