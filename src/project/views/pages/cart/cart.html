@@ -13,6 +13,14 @@
             color: red;
         }
     </style>
+    <script type="text/javascript" src="/static/script/jquery-3.6.0.min.js"></script>
+    <script>
+        $(() => {
+            $("#clearCart").click(() => {
+                return confirm("Clear All In Cart?")
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -60,8 +68,8 @@
     <div class="cart_info">
         <span class="cart_span"><span class="b_count">{{.GetTotalCount}}</span> item(s) in cart</span>
         <span class="cart_span">Total: $<span class="b_price">{{.GetTotalAmount}}</span></span>
-        <span class="cart_span"><a href="/main">Continue Shopping</a></span>
-        <span class="cart_span"><a href="/">Clear All</a></span>
+        <span class="cart_span"><a href="/main">Add More</a></span>
+        <span class="cart_span"><a href="/clearCart?cartId={{.CartId}}" id="clearCart">Clear All</a></span>
         <span class="cart_span"><a href="/pages/cart/checkout.html">Checkout</a></span>
     </div>
     {{end}}

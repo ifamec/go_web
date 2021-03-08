@@ -85,3 +85,9 @@ func GetCartInfo(w http.ResponseWriter, r *http.Request)  {
 		_ = tp.Execute(w, emptyCart)
 	}
 }
+
+func ClearCart(w http.ResponseWriter, r *http.Request)  {
+	cartId := r.FormValue("cartId")
+	_ = dao.DeleteCartByCartId(cartId)
+	GetCartInfo(w, r)
+}

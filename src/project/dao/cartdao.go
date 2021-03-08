@@ -36,3 +36,14 @@ func UpdateCart(cart *model.Cart) (err error) {
 	_, err = utils.Db.Exec(sqlQuery, cart.GetTotalCount(), cart.GetTotalAmount(), cart.CartId)
 	return
 }
+
+func DeleteCartByCartId(cartId string) (err error) {
+	// delete cart items
+	err = DeleteCartItemsByCartID(cartId)
+	if err != nil {
+		return err
+	}
+	sqlQuery := "delete from carts where id = ?"
+	_, err = utils.Db.Exec(sqlQuery, cartId)
+	return err
+}
