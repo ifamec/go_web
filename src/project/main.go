@@ -43,6 +43,8 @@ func main()  {
 	http.HandleFunc("/deleteCartItem", controller.DeleteCartItem)
 	// update cart item
 	http.HandleFunc("/updateCartItem", controller.UpdateCartItem)
+	// checkout
+	http.HandleFunc("/checkout", controller.Checkout)
 
 
 

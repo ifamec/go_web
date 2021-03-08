@@ -9,4 +9,5 @@ type Order struct {
 	TotalAmount float64
 	Status      int         // 0 order places, 1 shipped, 2 order complete
 	UserId      int
+	Username    string
 }

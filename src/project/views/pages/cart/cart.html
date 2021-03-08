@@ -24,9 +24,14 @@
                 return confirm(`Delete ${title}?`)
             })
             $(".updateCount").change((e) => {
-                const cartItemId = e.currentTarget.id
-                const value = e.currentTarget.value
-                window.location.href = "/updateCartItem?cartItemId=" + cartItemId + "&bookCount=" + value
+                const max = e.currentTarget.max
+                let value = e.currentTarget.value
+                if (value > max) {
+                    alert("Only " + max + " available.")
+                    e.currentTarget.value = max
+                    value = max
+                }
+                window.location.href = "/updateCartItem?cartItemId=" + e.currentTarget.id + "&bookCount=" + value
             })
         });
     </script>
@@ -66,7 +71,7 @@
         {{range .CartItems}}
         <tr>
             <td>{{.Book.Title}}</td>
-            <td><label><input id="{{.CartItemId}}" class="updateCount" type="number" value="{{.Count}}" style="width: 50px;height: 25px"/></label></td>
+            <td><label><input id="{{.CartItemId}}" class="updateCount" type="number" value="{{.Count}}" min="1" max="{{.Book.Stock}}" style="width: 50px;height: 25px"/></label></td>
             <td>{{.Book.Price}}</td>
             <td>{{.Amount}}</td>
             <td><a class="deleteCartItem" href="/deleteCartItem?cartItemId={{.CartItemId}}">Delete</a></td>
@@ -79,7 +84,7 @@
         <span class="cart_span">Total: $<span class="b_price">{{.GetTotalAmount}}</span></span>
         <span class="cart_span"><a href="/main">Add More</a></span>
         <span class="cart_span"><a href="/clearCart?cartId={{.CartId}}" id="clearCart">Clear All</a></span>
-        <span class="cart_span"><a href="/pages/cart/checkout.html">Checkout</a></span>
+        <span class="cart_span"><a href="/checkout">Checkout</a></span>
     </div>
     {{end}}
 

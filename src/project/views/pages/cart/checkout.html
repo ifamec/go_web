@@ -17,8 +17,8 @@
     <img class="logo_img" alt="" src="/static/img/logo.gif">
     <span class="wel_word">Checkout</span>
     <div>
-        <span>Welcome <span class="um_span">User</span></span>
-        <a href="/getCartInfo">Card</a>
+        <span>Welcome <span class="um_span">{{.Username}}</span></span>
+        <a href="/getCartInfo">Cart</a>
         <a href="/logout">Logout</a>&nbsp;&nbsp;
         <a href="/main">Back</a>
     </div>
@@ -26,7 +26,9 @@
 
 <div id="main">
 
-    <h1>Order Success, Order Number: 2937474382928484747</h1>
+    <h1>Order Success, <br/>
+        Order Time: <a style="color: blue">{{.Timestamp.Format "2006-01-02 15:04:05"}}</a><br/>
+        Order Number: <a style="color: red">{{.OrderId}}</a></h1>
 
 </div>
 

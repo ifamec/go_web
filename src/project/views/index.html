@@ -67,7 +67,11 @@
             </div>
             <div class="book_info">
                 <div class="book_add">
+                {{if gt .Stock 0}}
                     <button class="addBookToCart" id="{{.Id}}">Add To Cart</button>
+                {{else}}
+                    <span style="color: red">Out Of Stock</span>
+                {{end}}
                 </div>
                 <div class="book_name">
                     <a><b>Title: </b>{{.Title}}</a>

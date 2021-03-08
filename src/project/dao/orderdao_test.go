@@ -40,6 +40,7 @@ func testAddOrder(t *testing.T) {
 		TotalAmount: 400,
 		Status:      0,
 		UserId:      1,
+		Username:    "admin",
 	})
 	err = AddOrderItem(oi1)
 	err = AddOrderItem(oi2)
