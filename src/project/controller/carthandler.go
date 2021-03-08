@@ -11,13 +11,18 @@ import (
 
 // AddBookToCart
 func AddBookToCart(w http.ResponseWriter, r *http.Request)  {
+	// has cart
+	isLogin, session := dao.IsLogin(r)
+	if !isLogin {
+		_, _ = w.Write([]byte("Please Login and retry."))
+		return
+	}
+
 	bookId, err := strconv.Atoi(r.FormValue("bookId"))
 	if err != nil { fmt.Println(err) }
 
 	book, err := dao.GetBookById(bookId)
 	if err != nil { fmt.Println(err) }
-	// has cart
-	_, session := dao.IsLogin(r)
 	userId := session.UserId
 	cart, _ := dao.GetCartByUserId(userId)
 	if cart != nil {
@@ -57,5 +62,5 @@ func AddBookToCart(w http.ResponseWriter, r *http.Request)  {
 		}
 		_ = dao.AddCart(cart)
 	}
-	_, _ = w.Write([]byte(book.Title))
+	_, _ = w.Write([]byte("\"" + book.Title + "\" added to cart."))
 }
