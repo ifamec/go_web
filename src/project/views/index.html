@@ -14,7 +14,10 @@
             $(".addBookToCart").click((e) => {
                 const bookId = e.currentTarget.id
                 $.post("/addBookToCart", {"bookId": bookId}, (res) => {
-                   $("#cartMsg").text(res)
+                    if (res === "Please Login and retry.") {
+                        location = "/pages/user/login.html"
+                    }
+                    $("#cartMsg").text(res)
                 })
             });
 
@@ -36,7 +39,7 @@
     {{else}}
     <div>
         <span>Welcome <span class="um_span">{{.Username}}</span></span>
-        <a href="/pages/cart/cart.html">Cart</a>&nbsp;
+        <a href="/getCartInfo">Cart</a>&nbsp;
         <a href="/logout">Logout</a>&nbsp;&nbsp;
         <a href="/main">Back</a>
     </div>

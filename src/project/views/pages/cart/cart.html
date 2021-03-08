@@ -10,11 +10,19 @@
 <div id="header">
     <img class="logo_img" alt="" src="/static/img/logo.gif">
     <span class="wel_word">Cart</span>
+    {{if .UserId}}
     <div>
-        <span>Welcome <span class="um_span">User</span></span>
+        <span>Welcome <span class="um_span">{{.Username}}</span></span>
+        <a href="/getCartInfo">Cart</a>&nbsp;
         <a href="/logout">Logout</a>&nbsp;&nbsp;
         <a href="/main">Back</a>
     </div>
+    {{else}}
+    <div>
+        <a href="/pages/user/login.html">Login</a> |
+        <a href="/pages/user/signup.html">Signup</a> |
+    </div>
+    {{end}}
 </div>
 
 <div id="main">
@@ -27,35 +35,20 @@
             <td>Total</td>
             <td>Operation</td>
         </tr>
+        {{range .CartItems}}
         <tr>
-            <td>A Brief History of Time</td>
-            <td>2</td>
-            <td>30.00</td>
-            <td>60.00</td>
+            <td>{{.Book.Title}}</td>
+            <td>{{.Count}}</td>
+            <td>{{.Book.Price}}</td>
+            <td>{{.Amount}}</td>
             <td><a href="#">Delete</a></td>
         </tr>
-
-        <tr>
-            <td>The Great Gatsby</td>
-            <td>1</td>
-            <td>10.00</td>
-            <td>10.00</td>
-            <td><a href="#">Delete</a></td>
-        </tr>
-
-        <tr>
-            <td>One Hundred Years of Solitude</td>
-            <td>1</td>
-            <td>20.00</td>
-            <td>20.00</td>
-            <td><a href="#">Delete</a></td>
-        </tr>
-
+        {{end}}
     </table>
 
     <div class="cart_info">
-        <span class="cart_span"><span class="b_count">4</span> item(s) in cart</span>
-        <span class="cart_span">Total: $<span class="b_price">90.00</span></span>
+        <span class="cart_span"><span class="b_count">{{.GetTotalCount}}</span> item(s) in cart</span>
+        <span class="cart_span">Total: $<span class="b_price">{{.GetTotalAmount}}</span></span>
         <span class="cart_span"><a href="#">Clear All</a></span>
         <span class="cart_span"><a href="/pages/cart/checkout.html">Checkout</a></span>
     </div>

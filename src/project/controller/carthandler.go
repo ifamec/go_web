@@ -5,6 +5,7 @@ import (
 	"go_web/src/project/dao"
 	"go_web/src/project/model"
 	"go_web/src/project/utils"
+	"html/template"
 	"net/http"
 	"strconv"
 )
@@ -31,7 +32,7 @@ func AddBookToCart(w http.ResponseWriter, r *http.Request)  {
 			for _, v := range cart.CartItems {
 				if bookId == v.Book.Id {
 					v.Count++
-					_ = dao.UpdateBookCount(v.Count, bookId, cart.CartId)
+					_ = dao.UpdateBookCount(v, bookId, cart.CartId)
 				}
 			}
 		} else { // new book
@@ -63,4 +64,18 @@ func AddBookToCart(w http.ResponseWriter, r *http.Request)  {
 		_ = dao.AddCart(cart)
 	}
 	_, _ = w.Write([]byte("\"" + book.Title + "\" added to cart."))
+}
+
+func GetCartInfo(w http.ResponseWriter, r *http.Request)  {
+	_, session := dao.IsLogin(r)
+	userId := session.UserId
+
+	// get cart
+	cart, _ := dao.GetCartByUserId(userId)
+	cart.Username = session.Username
+	if cart != nil {
+		tp := template.Must(template.ParseFiles("views/pages/cart/cart.html"))
+		_ = tp.Execute(w, cart)
+	}
+
 }

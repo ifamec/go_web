@@ -35,6 +35,8 @@ func main()  {
 	http.HandleFunc("/getPageBooksByPrice", controller.GetPageBooksByPrice)
 	// add book to cart
 	http.HandleFunc("/addBookToCart", controller.AddBookToCart)
+	// get cart info
+	http.HandleFunc("/getCartInfo", controller.GetCartInfo)
 
 
 

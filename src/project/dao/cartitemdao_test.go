@@ -3,6 +3,7 @@ package dao
 import (
 	_ "database/sql"
 	"fmt"
+	"go_web/src/project/model"
 	"testing"
 )
 
@@ -22,7 +23,11 @@ func testGetCartItemByBookId(t *testing.T)  {
 	fmt.Println(cartItem)
 }
 func testUpdateBookCount(t *testing.T)  {
-	err := UpdateBookCount(6,1, "1234")
+	book, _ := GetBookById(2)
+	err := UpdateBookCount(&model.CartItem{
+		Count: 7,
+		Book: book,
+	},1, "1234")
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()

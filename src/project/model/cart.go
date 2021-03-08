@@ -6,6 +6,7 @@ type Cart struct {
 	TotalCount  int
 	TotalAmount float64
 	UserId      int
+	Username    string
 }
 
 func (c *Cart) GetTotalAmount() (tamount float64) {
