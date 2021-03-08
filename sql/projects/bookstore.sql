@@ -107,3 +107,34 @@ create table cart_items
     foreign key (cart_id) references carts(id)
 );
 select * from cart_items;
+
+-- Orders
+create table orders
+(
+    id           varchar(100) primary key,
+    timestamp    datetime      not null,
+    total_count  int           not null,
+    total_amount double(11, 2) not null,
+    state        int           not null,
+    user_id      int           not null,
+    foreign key (user_id) references users (id)
+);
+
+select * from orders;
+
+-- Order Items
+create table order_items
+(
+    id       int primary key auto_increment,
+    count    int           not null,
+    amount   double(11, 2) not null,
+    title    varchar(100)  not null,
+    author   varchar(100)  not null,
+    price    double(11, 2) not null,
+    img_path varchar(100)  not null,
+    order_id varchar(100)  not null,
+    foreign key (order_id) references orders (id)
+
+);
+
+select * from order_items;
