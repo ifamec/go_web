@@ -22,6 +22,12 @@ func GetCartItemByBookIdCartId(bookId int, cartId string) (cartItem *model.CartI
 	}
 	return
 }
+func UpdateBookCount(bCount int, bookId int, cartId string) (err error) {
+	sqlQuery := "update cart_items set COUNT = ? where book_id = ? and cart_id = ?"
+	_, err = utils.Db.Exec(sqlQuery, bCount, bookId, cartId)
+	return
+}
+
 func GetCartItemsByCartId(cartId string) (cartItems []*model.CartItem, err error) {
 	sqlQuery := "select id,count,amount,book_id,cart_id from cart_items where cart_id = ?"
 	row, err := utils.Db.Query(sqlQuery, cartId)

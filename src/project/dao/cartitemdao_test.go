@@ -10,15 +10,23 @@ func TestCartItem(t *testing.T) {
 	fmt.Println("Test - cartitemdao.go")
 	t.Run("Get Cart Item By BookId CartId", testGetCartItemByBookId)
 	t.Run("Get Cart Items By CartId", testGetCartItemsByCartId)
+	t.Run("Update Book Count", testUpdateBookCount)
 }
 
 func testGetCartItemByBookId(t *testing.T)  {
-	cartItem, err := GetCartItemByBookIdCartId(1, "b6891c8b-35c1-4e23-5e45-a8a82da711f8")
+	cartItem, err := GetCartItemByBookIdCartId(1, "1234")
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()
 	}
 	fmt.Println(cartItem)
+}
+func testUpdateBookCount(t *testing.T)  {
+	err := UpdateBookCount(6,1, "1234")
+	if err != nil {
+		fmt.Println(err)
+		t.Fail()
+	}
 }
 
 func testGetCartItemsByCartId(t *testing.T)  {

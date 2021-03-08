@@ -14,7 +14,7 @@
             $(".addBookToCart").click((e) => {
                 const bookId = e.currentTarget.id
                 $.post("/addBookToCart", {"bookId": bookId}, (res) => {
-                    console.log(bookId)
+                   $("#cartMsg").text(`"${res}" added to cart.`)
                 })
             });
 
@@ -54,7 +54,7 @@
         <div style="text-align: center">
             <span>3 items in cart</span>
             <div>
-                Add<span style="color: red">A Brief History of Time</span>to cart
+                <span id="cartMsg" style="color: red">Welcome</span>
             </div>
         </div>
         {{range .Books}}
