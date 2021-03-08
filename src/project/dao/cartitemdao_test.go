@@ -12,6 +12,7 @@ func TestCartItem(t *testing.T) {
 	t.Run("Get Cart Item By BookId CartId", testGetCartItemByBookId)
 	t.Run("Get Cart Items By CartId", testGetCartItemsByCartId)
 	t.Run("Update Book Count", testUpdateBookCount)
+	t.Run("Delete CartItem By CartItemID", testDeleteCartItemByCartItemID)
 }
 
 func testGetCartItemByBookId(t *testing.T)  {
@@ -42,6 +43,13 @@ func testGetCartItemsByCartId(t *testing.T)  {
 	}
 	for _, v := range cartItems {
 		fmt.Println(v)
+	}
+}
+func testDeleteCartItemByCartItemID(t *testing.T)  {
+	err := DeleteCartItemByCartItemID(24)
+	if err != nil {
+		fmt.Println(err)
+		t.Fail()
 	}
 }
 

@@ -91,3 +91,22 @@ func ClearCart(w http.ResponseWriter, r *http.Request)  {
 	_ = dao.DeleteCartByCartId(cartId)
 	GetCartInfo(w, r)
 }
+
+func DeleteCartItem(w http.ResponseWriter, r *http.Request)  {
+	cartItemId, err := strconv.Atoi(r.FormValue("cartItemId"))
+	if err != nil { return }
+	_, session := dao.IsLogin(r)
+	userId := session.UserId
+	cart, _ := dao.GetCartByUserId(userId)
+	cartItems := cart.CartItems
+	for k, v := range cartItems {
+		if cartItemId == v.CartItemId {
+			 // remove from slice
+			cartItems = append(cartItems[:k], cartItems[k+1:]...)
+			cart.CartItems = cartItems // OPTIONAL
+			_ = dao.DeleteCartItemByCartItemID(cartItemId)
+		}
+	}
+	_ = dao.UpdateCart(cart)
+	GetCartInfo(w, r)
+}

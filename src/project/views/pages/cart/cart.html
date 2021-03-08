@@ -19,6 +19,10 @@
             $("#clearCart").click(() => {
                 return confirm("Clear All In Cart?")
             });
+            $(".deleteCartItem").click((e) => {
+                const title = $(e.currentTarget).parent().siblings().first().text()
+                return confirm(`Delete ${title}?`)
+            });
         });
     </script>
 </head>
@@ -60,7 +64,7 @@
             <td>{{.Count}}</td>
             <td>{{.Book.Price}}</td>
             <td>{{.Amount}}</td>
-            <td><a href="#">Delete</a></td>
+            <td><a class="deleteCartItem" href="/deleteCartItem?cartItemId={{.CartItemId}}">Delete</a></td>
         </tr>
         {{end}}
     </table>

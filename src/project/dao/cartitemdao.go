@@ -52,3 +52,9 @@ func DeleteCartItemsByCartID(cartId string) (err error) {
 	_, err = utils.Db.Exec(sqlQuery, cartId)
 	return err
 }
+
+func DeleteCartItemByCartItemID(cartItemId int) (err error) {
+	sqlQuery := "delete from cart_items where id = ?"
+	_, err = utils.Db.Exec(sqlQuery, cartItemId)
+	return err
+}
