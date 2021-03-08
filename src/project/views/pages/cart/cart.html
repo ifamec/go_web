@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>Cart</title>
     <link type="text/css" rel="stylesheet" href="/static/css/style.css">
+    <style type="text/css">
+        h1 {
+            text-align: center;
+            margin-top: 200px;
+        }
+        h1 a {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
@@ -26,7 +35,9 @@
 </div>
 
 <div id="main">
-
+    {{if not .CartItems}}
+    <h1>Empty Cart. <a href="/main">Go Shopping</a></h1>
+    {{else}}
     <table>
         <tr>
             <td>Name</td>
@@ -49,9 +60,11 @@
     <div class="cart_info">
         <span class="cart_span"><span class="b_count">{{.GetTotalCount}}</span> item(s) in cart</span>
         <span class="cart_span">Total: $<span class="b_price">{{.GetTotalAmount}}</span></span>
-        <span class="cart_span"><a href="#">Clear All</a></span>
+        <span class="cart_span"><a href="/main">Continue Shopping</a></span>
+        <span class="cart_span"><a href="/">Clear All</a></span>
         <span class="cart_span"><a href="/pages/cart/checkout.html">Checkout</a></span>
     </div>
+    {{end}}
 
 </div>
 

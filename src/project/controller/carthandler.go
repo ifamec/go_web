@@ -72,10 +72,16 @@ func GetCartInfo(w http.ResponseWriter, r *http.Request)  {
 
 	// get cart
 	cart, _ := dao.GetCartByUserId(userId)
-	cart.Username = session.Username
 	if cart != nil {
+		cart.Username = session.Username
 		tp := template.Must(template.ParseFiles("views/pages/cart/cart.html"))
 		_ = tp.Execute(w, cart)
+	} else {
+		emptyCart := &model.Cart{
+			Username: session.Username,
+			UserId:   session.UserId,
+		}
+		tp := template.Must(template.ParseFiles("views/pages/cart/cart.html"))
+		_ = tp.Execute(w, emptyCart)
 	}
-
 }
