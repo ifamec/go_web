@@ -48,3 +48,9 @@ func Checkout(w http.ResponseWriter, r *http.Request)  {
 	tp := template.Must(template.ParseFiles("views/pages/cart/checkout.html"))
 	_ = tp.Execute(w, order)
 }
+
+func GetOrders(w http.ResponseWriter, r *http.Request)  {
+	orders, _ := dao.GetOrders()
+	tp := template.Must(template.ParseFiles("views/pages/order/order_manager.html"))
+	_ = tp.Execute(w, orders)
+}

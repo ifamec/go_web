@@ -21,21 +21,27 @@
         <tr>
             <th>Order Number</th>
             <th>Date</th>
-            <th>Count</th>
-            <th>Amount</th>
+            <th>Total Count</th>
+            <th>Total Amount</th>
             <th>Details</th>
             <th>Status</th>
         </tr>
+        {{range .}}
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><a href="/">Order Details</a></td>
+            <td>{{.OrderId}}</td>
+            <td>{{.Timestamp.Format "2006-01-02 15:04:05"}}</td>
+            <td>{{.TotalCount}}</td>
+            <td>{{.TotalAmount}}</td>
+            <td><a href="#">Order Details</a></td>
             <td class="state">
-                <a href="/">Processing Order</a>
+                {{if eq .Status 1}}
+                Shipped
+                {{else}}
+                <a href="#">Process</a>
+                {{end}}
             </td>
         </tr>
+        {{end}}
     </table>
 </div>
 
