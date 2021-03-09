@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"encoding/json"
 	"fmt"
 	"go_web/src/project/dao"
 	"go_web/src/project/model"
@@ -127,5 +128,22 @@ func UpdateCartItem(w http.ResponseWriter, r *http.Request)  {
 		}
 	}
 	_ = dao.UpdateCart(cart)
-	GetCartInfo(w, r)
+	// GetCartInfo(w, r)
+	cart, _ = dao.GetCartByUserId(userId)
+	var updateItemAmount float64
+	for _, v := range cart.CartItems {
+		if cartItemId == v.CartItemId {
+			updateItemAmount = v.Amount
+		}
+	}
+	response := utils.UpdateCartResponse{
+		TotalCount:       cart.GetTotalCount(),
+		TotalAmount:      cart.GetTotalAmount(),
+		UpdateItemAmount: updateItemAmount,
+	}
+	js, err := json.Marshal(response)
+	if err != nil {
+		fmt.Println("Marshall Error", err)
+	}
+	_, _ = w.Write(js)
 }

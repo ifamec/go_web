@@ -24,14 +24,28 @@
                 return confirm(`Delete ${title}?`)
             })
             $(".updateCount").change((e) => {
-                const max = e.currentTarget.max
-                let value = e.currentTarget.value
+                const max = Number(e.currentTarget.max)
+                const min = Number(e.currentTarget.min)
+                const value = Number(e.currentTarget.value)
                 if (value > max) {
                     alert("Only " + max + " available.")
                     e.currentTarget.value = max
-                    value = max
                 }
-                window.location.href = "/updateCartItem?cartItemId=" + e.currentTarget.id + "&bookCount=" + value
+                if (value < min) {
+                    alert("At least " + min + ".")
+                    e.currentTarget.value = min
+                }
+                // window.location.href = "/updateCartItem?cartItemId=" + e.currentTarget.id + "&bookCount=" + value
+                $.post("/updateCartItem", {
+                    "cartItemId": e.currentTarget.id,
+                    "bookCount": e.currentTarget.value
+                }, (res) => {
+                    obj = JSON.parse(res)
+                    // console.log(obj)
+                    $("#b_count").text(obj.total_count)
+                    $("#b_price").text(obj.total_amount.toFixed(2))
+                    $(e.currentTarget).parent().parent().next().next().text(obj.update_item_amount.toFixed(2))
+                })
             })
         });
     </script>
@@ -81,8 +95,8 @@
     </table>
 
     <div class="cart_info">
-        <span class="cart_span"><span class="b_count">{{.GetTotalCount}}</span> item(s) in cart</span>
-        <span class="cart_span">Total: $<span class="b_price">{{.GetTotalAmount}}</span></span>
+        <span class="cart_span"><span class="b_count" id="b_count">{{.GetTotalCount}}</span> item(s) in cart</span>
+        <span class="cart_span">Total: $<span class="b_price" id="b_price">{{.GetTotalAmount}}</span></span>
         <span class="cart_span"><a href="/main">Add More</a></span>
         <span class="cart_span"><a href="/clearCart?cartId={{.CartId}}" id="clearCart">Clear All</a></span>
         <span class="cart_span"><a href="/checkout">Checkout</a></span>
