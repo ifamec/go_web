@@ -32,7 +32,7 @@
             <td>{{.Timestamp.Format "2006-01-02 15:04:05"}}</td>
             <td>{{.TotalCount}}</td>
             <td>{{.TotalAmount}}</td>
-            <td><a href="#">Order Details</a></td>
+            <td><a href="/getOrderDetails?orderId={{.OrderId}}">Order Details</a></td>
             <td class="state">
                 {{if eq .Status 1}}
                 Shipped

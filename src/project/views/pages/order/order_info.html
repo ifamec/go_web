@@ -10,10 +10,9 @@
     <img class="logo_img" alt="" src="/static/img/logo.gif">
     <span class="wel_word">Order Details</span>
     <div>
-        <a href="/getCartInfo">Cart</a>&nbsp;&nbsp;
-        <a href="/getMyOrder">My Order</a>&nbsp;&nbsp;
-        <a href="/logout">Logout</a>&nbsp;&nbsp;
-        <a href="/main">Back</a>
+        <a href="/getPageBooks">Manage Book</a> |
+        <a href="/getOrders">Manage Order</a> |
+        <a href="/main">Back To Store</a>
     </div>
 </div>
 
@@ -27,14 +26,16 @@
             <th>Count</th>
             <th>Amount</th>
         </tr>
+        {{range .}}
         <tr>
-            <td><img class="book_img" src="#"/></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><img class="book_img" src="https://m.media-amazon.com/images/I/{{.ImgPath}}.jpg" alt=""/></td>
+            <td>{{.Title}}</td>
+            <td>{{.Author}}</td>
+            <td>{{.Price}}</td>
+            <td>{{.Count}}</td>
+            <td>{{.Amount}}</td>
         </tr>
+        {{end}}
     </table>
 </div>
 

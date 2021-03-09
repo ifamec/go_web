@@ -54,3 +54,10 @@ func GetOrders(w http.ResponseWriter, r *http.Request)  {
 	tp := template.Must(template.ParseFiles("views/pages/order/order_manager.html"))
 	_ = tp.Execute(w, orders)
 }
+
+func GetOrderDetails(w http.ResponseWriter, r *http.Request)  {
+	orderId := r.FormValue("orderId")
+	orderItems, _ := dao.GetOrderItemsByOrderId(orderId)
+	tp := template.Must(template.ParseFiles("views/pages/order/order_info.html"))
+	_ = tp.Execute(w, orderItems)
+}
