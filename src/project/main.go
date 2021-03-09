@@ -49,6 +49,8 @@ func main()  {
 	http.HandleFunc("/getOrders", controller.GetOrders)
 	// get order detail
 	http.HandleFunc("/getOrderDetails", controller.GetOrderDetails)
+	// get my orders
+	http.HandleFunc("/getMyOrders", controller.GetMyOrders)
 
 
 

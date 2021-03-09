@@ -11,7 +11,7 @@ import (
 func TestOrder(t *testing.T) {
 	fmt.Println("Test - orderdao.go")
 	t.Run("Add Order", testAddOrder)
-	t.Run("Get Orders", testGetOrders)
+	t.Run("Get My Orders", testGetMyOrders)
 }
 
 func testAddOrder(t *testing.T) {
@@ -54,6 +54,16 @@ func testAddOrder(t *testing.T) {
 
 func testGetOrders(t *testing.T) {
 	orders, err := GetOrders()
+	if err != nil {
+		fmt.Println(err)
+		t.Fail()
+	}
+	for _, v := range orders {
+		fmt.Println(v)
+	}
+}
+func testGetMyOrders(t *testing.T) {
+	orders, err := GetMyOrders(1, "admin")
 	if err != nil {
 		fmt.Println(err)
 		t.Fail()

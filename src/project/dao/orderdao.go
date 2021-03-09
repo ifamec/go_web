@@ -25,3 +25,19 @@ func GetOrders() (orders []*model.Order, err error) {
 	}
 	return
 }
+
+func GetMyOrders(userId int, userName string) (orders []*model.Order, err error) {
+	sqlQuery := "select id,timestamp,total_count,total_amount,state,user_id from orders where user_id = ?"
+	rows, err := utils.Db.Query(sqlQuery, userId)
+	if err != nil {
+		return nil, err
+	}
+	orders = make([]*model.Order, 0)
+	for rows.Next() {
+		o := &model.Order{}
+		_ = rows.Scan(&o.OrderId, &o.Timestamp, &o.TotalCount, &o.TotalAmount, &o.Status, &o.UserId)
+		o.Username = userName
+		orders = append(orders, o)
+	}
+	return
+}
