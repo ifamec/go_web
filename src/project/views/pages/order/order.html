@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Order</title>
+    <link type="text/css" rel="stylesheet" href="/static/css/style.css">
+    <style type="text/css">
+        h1 {
+            text-align: center;
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="header">
+    <img class="logo_img" alt="" src="/static/img/logo.gif">
+    <span class="wel_word">My Order</span>
+    <div>
+        <span>Welcome <span class="um_span">{{.UserName}}</span></span>
+        <a href="/getCartInfo">Cart</a>&nbsp;&nbsp;
+        <a href="/getMyOrder">My Order</a>&nbsp;&nbsp;
+        <a href="/logout">Logout</a>&nbsp;&nbsp;
+        <a href="/main">Back</a>
+    </div>
+</div>
+
+<div id="main">
+    <table>
+        <tr>
+            <th>Order Number</th>
+            <th>Date</th>
+            <th>Count</th>
+            <th>Amount</th>
+            <th>Details</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="/"></a>Order Details</td>
+            <td class="state">
+                <a href="/">Processing Order</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="bottom">
+    <span>Bookstore.Copyright &copy;2021</span>
+</div>
+</body>
+</html>
