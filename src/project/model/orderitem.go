@@ -9,4 +9,5 @@ type OrderItem struct {
 	Price       float64
 	ImgPath     string
 	OrderId     string
+	Username    string
 }

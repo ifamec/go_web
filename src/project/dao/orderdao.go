@@ -41,3 +41,9 @@ func GetMyOrders(userId int, userName string) (orders []*model.Order, err error)
 	}
 	return
 }
+
+func UpdateOrderState(orderId string, state int) (err error) {
+	sqlQuery := "update orders set state =? where id = ?"
+	_, err = utils.Db.Exec(sqlQuery, state, orderId)
+	return
+}

@@ -11,7 +11,7 @@ func AddOrderItem(oi *model.OrderItem) (err error) {
 	return
 }
 
-func GetOrderItemsByOrderId(orderId string) (ois []*model.OrderItem, err error) {
+func GetOrderItemsByOrderId(orderId string, userName string) (ois []*model.OrderItem, err error) {
 	sqlQuery := "select id,count,amount,title,author,price,img_path,order_id from order_items where order_id = ?"
 	rows, err := utils.Db.Query(sqlQuery, orderId)
 	if err != nil {
@@ -21,6 +21,7 @@ func GetOrderItemsByOrderId(orderId string) (ois []*model.OrderItem, err error) 
 	for rows.Next() {
 		oi := &model.OrderItem{}
 		_ = rows.Scan(&oi.OrderItemId, &oi.Count, &oi.Amount, &oi.Title, &oi.Author, &oi.Price, &oi.ImgPath, &oi.OrderId)
+		oi.Username = userName
 		ois = append(ois, oi)
 	}
 	return

@@ -12,6 +12,7 @@ func TestOrder(t *testing.T) {
 	fmt.Println("Test - orderdao.go")
 	t.Run("Add Order", testAddOrder)
 	t.Run("Get My Orders", testGetMyOrders)
+	t.Run("update Order State", testUpdateOrderState)
 }
 
 func testAddOrder(t *testing.T) {
@@ -70,5 +71,12 @@ func testGetMyOrders(t *testing.T) {
 	}
 	for _, v := range orders {
 		fmt.Println(v)
+	}
+}
+func testUpdateOrderState(t *testing.T) {
+	err := UpdateOrderState("1234", 1)
+	if err != nil {
+		fmt.Println(err)
+		t.Fail()
 	}
 }

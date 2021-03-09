@@ -44,7 +44,9 @@
             <td><a href="/getOrderDetails?orderId={{.OrderId}}">Order Details</a></td>
             <td class="state">
                 {{if eq .Status 1}}
-                <a href="#">Confirm</a>
+                <a href="/confirmOrder?orderId={{.OrderId}}">Confirm</a>
+                {{else if eq .Status 2}}
+                Order Complete
                 {{else}}
                 Processing
                 {{end}}

@@ -63,8 +63,24 @@ func GetMyOrders(w http.ResponseWriter, r *http.Request)  {
 }
 
 func GetOrderDetails(w http.ResponseWriter, r *http.Request)  {
+	isLogin, session := dao.IsLogin(r)
+	var userName string = ""
+	if isLogin {
+		userName = session.Username
+	}
 	orderId := r.FormValue("orderId")
-	orderItems, _ := dao.GetOrderItemsByOrderId(orderId)
+	orderItems, _ := dao.GetOrderItemsByOrderId(orderId, userName)
 	tp := template.Must(template.ParseFiles("views/pages/order/order_info.html"))
 	_ = tp.Execute(w, orderItems)
+}
+
+func ShipOrder(w http.ResponseWriter, r *http.Request)  {
+	orderId := r.FormValue("orderId")
+	_ = dao.UpdateOrderState(orderId, 1)
+	GetOrders(w, r)
+}
+func ConfirmOrder(w http.ResponseWriter, r *http.Request)  {
+	orderId := r.FormValue("orderId")
+	_ = dao.UpdateOrderState(orderId, 2)
+	GetMyOrders(w, r)
 }
